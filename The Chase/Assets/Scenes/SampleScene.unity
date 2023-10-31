@@ -123,6 +123,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &470734350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 470734352}
+  - component: {fileID: 470734351}
+  m_Layer: 0
+  m_Name: 'Police Car Spawner '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &470734351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470734350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4bc1495d8272f42a8585413772a040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  policeCarPrefab: {fileID: 1270680931848686157, guid: b13e4e0ab8033cd4fa476e5196c072bf, type: 3}
+  playerCarTransform: {fileID: 544175396}
+  spawnInterval: 10
+  spawnXOffset: 11
+--- !u!4 &470734352
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470734350}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.6202819, y: 32.218464, z: 0.020151354}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +415,7 @@ GameObject:
   - component: {fileID: 1406848645}
   - component: {fileID: 1406848646}
   m_Layer: 0
-  m_Name: Police Car Spawner
+  m_Name: Police Bike Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -402,7 +450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   policeCarPrefab: {fileID: 5540913616695032780, guid: 3f3d9cf2e2199fd4da33b7d896e3c315, type: 3}
   playerCarTransform: {fileID: 544175396}
-  spawnInterval: 3
+  spawnInterval: 4
   spawnXOffset: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -411,3 +459,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 544175396}
   - {fileID: 1406848645}
+  - {fileID: 470734352}
