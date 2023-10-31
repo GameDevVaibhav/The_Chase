@@ -23,7 +23,7 @@ public class PoliceCarMovement : MonoBehaviour
     }
     void Update()
     {
-        input = Input.GetAxis("Horizontal");
+       // input = Input.GetAxis("Horizontal");
 
     }
 
