@@ -8,8 +8,8 @@ public class PoliceCarMovement : MonoBehaviour
     float moveSpeed = 20f;
     [SerializeField]
     float steer = 10f;
-    [SerializeField]
-    Transform target;
+    
+    public Transform target;
     float input;
 
 
