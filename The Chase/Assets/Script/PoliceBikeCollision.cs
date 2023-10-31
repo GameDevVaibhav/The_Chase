@@ -10,5 +10,9 @@ public class PoliceBikeCollision : MonoBehaviour
         {
             Destroy(gameObject); 
         }
+        if (collision.gameObject.CompareTag("PoliceCar"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

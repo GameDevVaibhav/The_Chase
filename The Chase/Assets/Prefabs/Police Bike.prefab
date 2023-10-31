@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 24
   steer: 20
+  offset: 0
   target: {fileID: 0}
 --- !u!50 &8791902447279953685
 Rigidbody2D:

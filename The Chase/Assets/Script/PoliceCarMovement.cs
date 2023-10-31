@@ -8,7 +8,8 @@ public class PoliceCarMovement : MonoBehaviour
     float moveSpeed = 20f;
     [SerializeField]
     float steer = 10f;
-    
+    [SerializeField]
+    float offset;
     public Transform target;
     float input;
 
@@ -30,7 +31,7 @@ public class PoliceCarMovement : MonoBehaviour
     void FixedUpdate()
     {
         myRigidBody.velocity = transform.up * moveSpeed * Time.fixedDeltaTime * 10f;
-        Vector2 direction = (target.position - transform.position).normalized;
+        Vector2 direction = (target.position - transform.position).normalized+ new Vector3(offset,0f,0f);
         float rotationSteer=Vector3.Cross(transform.up,direction).z;
         myRigidBody.angularVelocity = rotationSteer * steer * 10f;
     }

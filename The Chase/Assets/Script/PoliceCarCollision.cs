@@ -10,5 +10,6 @@ public class PoliceCarCollision : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
     }
 }
