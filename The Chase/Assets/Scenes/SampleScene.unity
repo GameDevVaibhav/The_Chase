@@ -582,7 +582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrierPrefab: {fileID: 8637954597808863449, guid: ad9207fb80ab7cd4787384c8023938dd, type: 3}
   spawnInterval: 4
-  spawnXOffset: 10
+  yOffset: 5
   playerCarTransform: {fileID: 544175396}
 --- !u!1 &1991549980
 GameObject:
