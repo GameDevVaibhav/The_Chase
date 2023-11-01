@@ -9,36 +9,33 @@ public class SwatCarMovement : MonoBehaviour
     [SerializeField]
     float steer = 10f;
     float input;
-
-    public GameObject carToFollow; // Reference to Car1
-    public Vector3 offset; // Offset to the left of Car1
-    public float followPositionSpeed = 5.0f; // Speed at which Car2 follows Car1's position
-    public float followRotationSpeed = 5.0f; // Speed at which Car2 follows Car1's rotation
+    public Transform target;
+    public Vector3 offset; // Offset for the SWAT car
 
     Rigidbody2D myRigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
-        myRigidBody = GetComponent < Rigidbody2D>();
+        myRigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        input = Input.GetAxis("Horizontal");
+      // input = Input.GetAxis("Horizontal");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Calculate the desired position of Car2 with an offset to the left
-        Vector3 desiredPosition = carToFollow.transform.position - carToFollow.transform.right * offset.x;
+        // Calculate the desired position of the SWAT car with the given offset
+        Vector3 desiredPosition = target.position + target.right * offset.x;
 
-        // Gradually move Car2 towards the desired position
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, followPositionSpeed * Time.fixedDeltaTime);
+        // Gradually move the SWAT car towards the desired position
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, moveSpeed * Time.fixedDeltaTime*0.3f);
 
-        // Gradually rotate Car2 towards the desired rotation
-        transform.rotation = Quaternion.Slerp(transform.rotation, carToFollow.transform.rotation, followRotationSpeed * Time.fixedDeltaTime);
+        // Gradually rotate the SWAT car towards the desired rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, target.transform.rotation, moveSpeed * Time.fixedDeltaTime);
 
         myRigidBody.velocity = transform.up * moveSpeed * Time.fixedDeltaTime * 10f;
         myRigidBody.angularVelocity = -input * steer * 10f;
