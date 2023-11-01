@@ -9,6 +9,12 @@ public class SwatCarCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Baricet"))
         {
             Destroy(gameObject);
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.IncreaseBountyOnDestroy(150);
+                // Adjust the bounty amount as needed.
+            }
         }
     }
 }

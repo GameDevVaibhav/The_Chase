@@ -42,12 +42,12 @@ public class ObstacleSpawner : MonoBehaviour
         Vector3 spawnPosition2 = playerCarTransform.position + new Vector3(randomX, camHeight + yOffset, 0);
 
         GameObject barrier1 = Instantiate(barrierPrefab, spawnPosition1, Quaternion.identity);
-        GameObject barrier2 = Instantiate(barrierPrefab, spawnPosition2, Quaternion.identity);
+        //GameObject barrier2 = Instantiate(barrierPrefab, spawnPosition2, Quaternion.identity);
 
-        // You can add code here to move or rotate the barriers if needed.
+       
 
-        // Destroy the barriers after a certain time if required.
+       
         Destroy(barrier1, 10.0f);
-        Destroy(barrier2, 10.0f);
+        //Destroy(barrier2, 10.0f);
     }
 }

@@ -8,7 +8,12 @@ public class PoliceBikeCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PoliceBike"))
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.IncreaseBountyOnDestroy(10); // Adjust the bounty amount as needed.
+            }
         }
         if (collision.gameObject.CompareTag("PoliceCar"))
         {
