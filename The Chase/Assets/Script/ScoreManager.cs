@@ -6,26 +6,29 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     public Text scoreText; // Reference to a Text component to display the score.
-    public Text Heat;
+    public Text heatText; // Reference to a Text component to display the heat level.
     private int score = 0;
     private int heatLevel = 1;
     private int currentThreshold = 100; // Initial threshold for heat level 2.
     private int incrementThreshold = 200;
-    private int incremnetThresholdMultiplier = 1;
+    private int incrementThresholdMultiplier = 1;
     private float timeSinceLastUpdate = 0;
-    private float updateInterval = 1.0f; // Interval to increase score (e.g., 1 point per second).
+    private float updateInterval = 1.0f; // Interval to increase the score (e.g., 1 point per second).
+
+    // Define a delegate and event for the heat level change.
+    public delegate void HeatLevelChanged(int newHeatLevel);
+    public static event HeatLevelChanged OnHeatLevelChanged;
 
     private void Start()
     {
-        scoreText.text =  score.ToString();
-        Heat.text = heatLevel.ToString();
+        scoreText.text = score.ToString();
+        heatText.text = heatLevel.ToString();
     }
 
     private void Update()
     {
         timeSinceLastUpdate += Time.deltaTime;
 
-        Heat.text = heatLevel.ToString();
         if (timeSinceLastUpdate >= updateInterval)
         {
             IncreaseScore(1); // Increase score by 1 point every updateInterval seconds.
@@ -42,10 +45,14 @@ public class ScoreManager : MonoBehaviour
         if (score >= currentThreshold)
         {
             heatLevel++;
-            Debug.Log(heatLevel);
+            heatText.text = heatLevel.ToString();
             UpdateHeatThreshold();
-            
-            // You can add code here to handle changes related to the new heat level.
+
+            // Trigger the heat level change event.
+            if (OnHeatLevelChanged != null)
+            {
+                OnHeatLevelChanged(heatLevel);
+            }
         }
     }
 
@@ -53,10 +60,8 @@ public class ScoreManager : MonoBehaviour
     {
         // Define how to calculate the new threshold based on the current heat level.
         // You can adjust this calculation as needed.
-        currentThreshold = currentThreshold + (incrementThreshold * incremnetThresholdMultiplier);
-        incremnetThresholdMultiplier++;
-        Debug.Log(currentThreshold);
-        
+        currentThreshold = currentThreshold + (incrementThreshold * incrementThresholdMultiplier);
+        incrementThresholdMultiplier++;
     }
 
     public void IncreaseBountyOnDestroy(int bountyAmount)

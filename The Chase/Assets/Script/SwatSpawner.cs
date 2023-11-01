@@ -12,11 +12,41 @@ public class SwatSpawner : MonoBehaviour
 
     private GameObject[] spawnedCars; // Array to keep track of spawned SWAT cars
 
+    private int currentHeatLevel = 1; // Store the current heat level.
+
+    private void OnEnable()
+    {
+        ScoreManager.OnHeatLevelChanged += HandleHeatLevelChanged;
+    }
+
+    private void OnDisable()
+    {
+        ScoreManager.OnHeatLevelChanged -= HandleHeatLevelChanged;
+    }
+
     private void Start()
     {
         spawnedCars = new GameObject[2]; // Initialize the array to hold 2 SWAT cars
-        SpawnSwatCar(0, leftSpawnPoint, swatCarOffsets[0]);
-        SpawnSwatCar(1, rightSpawnPoint, swatCarOffsets[1]);
+        SpawnSwatCars(); // Spawn SWAT cars initially.
+    }
+
+    private void HandleHeatLevelChanged(int newHeatLevel)
+    {
+        currentHeatLevel = newHeatLevel;
+        SpawnSwatCars(); // Spawn SWAT cars when the heat level changes.
+    }
+
+    private void SpawnSwatCars()
+    {
+        if (currentHeatLevel >= 2)
+        {
+            SpawnSwatCar(0, leftSpawnPoint, swatCarOffsets[0]);
+        }
+
+        if (currentHeatLevel >= 2)
+        {
+            SpawnSwatCar(1, rightSpawnPoint, swatCarOffsets[1]);
+        }
     }
 
     private void SpawnSwatCar(int index, Transform spawnPoint, Vector3 offset)

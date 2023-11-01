@@ -12,7 +12,7 @@ public class SwatCarCollision : MonoBehaviour
             ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
             if (scoreManager != null)
             {
-                scoreManager.IncreaseBountyOnDestroy(150);
+                scoreManager.IncreaseBountyOnDestroy(50);
                 // Adjust the bounty amount as needed.
             }
         }

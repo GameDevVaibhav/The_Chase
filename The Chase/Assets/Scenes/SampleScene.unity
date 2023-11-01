@@ -827,7 +827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 321275607}
-  Heat: {fileID: 305365999}
+  heatText: {fileID: 305365999}
 --- !u!4 &1682125107
 Transform:
   m_ObjectHideFlags: 0
@@ -956,6 +956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barrierPrefab: {fileID: 8637954597808863449, guid: ad9207fb80ab7cd4787384c8023938dd, type: 3}
+  swatCarPrefab: {fileID: 6406599219959968619, guid: 7efe20a41317c8f4c8430aa2f1303df8, type: 3}
   spawnInterval: 4
   yOffset: 5
   playerCarTransform: {fileID: 544175396}

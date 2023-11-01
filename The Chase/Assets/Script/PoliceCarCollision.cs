@@ -28,7 +28,7 @@ public class PoliceCarCollision : MonoBehaviour
                 ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
                 if (scoreManager != null)
                 {
-                    scoreManager.IncreaseBountyOnDestroy(50); // Adjust the bounty amount as needed.
+                    scoreManager.IncreaseBountyOnDestroy(25); // Adjust the bounty amount as needed.
                 }
 
                 collisionCount = 0;
