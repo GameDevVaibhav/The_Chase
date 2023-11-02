@@ -7,9 +7,9 @@ public class ScoreManager : MonoBehaviour
 {
     public Text scoreText; // Reference to a Text component to display the score.
     public Text heatText; // Reference to a Text component to display the heat level.
-    private int score = 0;
+    public int score = 0;
     private int heatLevel = 1;
-    private int currentThreshold = 100; // Initial threshold for heat level 2.
+    public int currentThreshold = 100; // Initial threshold for heat level 2.
     private int incrementThreshold = 200;
     private int incrementThresholdMultiplier = 1;
     private float timeSinceLastUpdate = 0;
