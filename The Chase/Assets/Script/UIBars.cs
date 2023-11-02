@@ -9,6 +9,7 @@ public class UIBars : MonoBehaviour
     public float fillAmount;
     public Image heatBar;
     public float previousThreshold;
+    private float lerpSpeed;
 
 
     private void Update()
@@ -16,6 +17,7 @@ public class UIBars : MonoBehaviour
         fillAmount = (float)scoreManager.score / (float)scoreManager.currentThreshold;
         fillAmount = Mathf.Clamp01(fillAmount);
 
-        heatBar.fillAmount= fillAmount;
+        lerpSpeed=3f*Time.deltaTime;
+        heatBar.fillAmount= Mathf.Lerp(heatBar.fillAmount, fillAmount, lerpSpeed);
     }
 }
