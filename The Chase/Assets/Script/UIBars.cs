@@ -16,12 +16,17 @@ public class UIBars : MonoBehaviour
     public GameObject fillArea;
     public float previousThreshold;
     private float lerpSpeed;
+    public CanvasGroup bustingBarGroup;
+    public CanvasGroup healthBarGroup;
+    
 
     public PlayerCarCollision playerCarCollision;
-
+    
 
     private void Update()
     {
+        
+
         HeatBar();
         BustingBar();
         HealthBar();
@@ -40,31 +45,32 @@ public class UIBars : MonoBehaviour
     private void BustingBar()
     {
         sliderValue = bustingArea.activeTimer;
-        if (sliderValue > 0)
-        {
-            fillArea.SetActive(true);
-        }
-        else
-        {
-            fillArea.SetActive(false);
-        }
+        
         lerpSpeed = 3f * Time.deltaTime;
         bustingBar.value = Mathf.Lerp(bustingBar.value, sliderValue, lerpSpeed);
+        float alpha = Mathf.Lerp(0, 1, sliderValue); // Fading in.
+        if (sliderValue == 0 && bustingBarGroup.alpha > 0)
+        {
+            alpha = Mathf.Lerp(bustingBarGroup.alpha, 0, lerpSpeed); // Fading out when sliderValue is zero.
+        }
+        bustingBarGroup.alpha = alpha;
     }
 
     private void HealthBar()
     {
         healthValue= (float)playerCarCollision.playerHealth / 10;
-        if (healthValue ==1)
+      
+        lerpSpeed = 3f * Time.deltaTime;
+        healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, healthValue, lerpSpeed);
+        if (healthValue == 1 && healthBarGroup.alpha > 0)
         {
-            healthBar.enabled = false;
+            float alpha = Mathf.Lerp(healthBarGroup.alpha, 0, lerpSpeed); // Fading out.
+            healthBarGroup.alpha = alpha;
         }
         else
         {
-            
-            healthBar.enabled = true;
+            float alpha = Mathf.Lerp(healthBarGroup.alpha, 1, lerpSpeed); // Fading in.
+            healthBarGroup.alpha = alpha;
         }
-        lerpSpeed = 3f * Time.deltaTime;
-        healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, healthValue, lerpSpeed);
     }
 }

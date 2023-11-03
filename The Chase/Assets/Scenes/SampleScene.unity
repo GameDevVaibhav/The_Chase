@@ -341,13 +341,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 321629199}
+  - component: {fileID: 321629200}
   m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &321629199
 RectTransform:
   m_ObjectHideFlags: 0
@@ -368,6 +369,18 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &321629200
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321629198}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &470734350
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1054,7 @@ GameObject:
   - component: {fileID: 766119450}
   - component: {fileID: 766119452}
   - component: {fileID: 766119451}
+  - component: {fileID: 766119453}
   m_Layer: 5
   m_Name: Health Bar
   m_TagString: Untagged
@@ -1105,6 +1119,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766119449}
   m_CullTransparentMesh: 1
+--- !u!225 &766119453
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766119449}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1121388408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,6 +1335,8 @@ MonoBehaviour:
   bustingBar: {fileID: 702235768}
   fillArea: {fileID: 321629198}
   previousThreshold: 0
+  bustingBarGroup: {fileID: 321629200}
+  healthBarGroup: {fileID: 766119453}
   playerCarCollision: {fileID: 544175400}
 --- !u!1 &1227690954
 GameObject:
