@@ -5,8 +5,11 @@ using UnityEngine;
 public class BustingArea : MonoBehaviour
 {
 
+
     private SpriteRenderer spriteRenderer;
     private int policeCarCount = 0;
+    public float activeTimer = 0f;
+    private bool gameIsOver = false;
 
     private void Start()
     {
@@ -16,9 +19,31 @@ public class BustingArea : MonoBehaviour
         spriteRenderer.enabled = false;
     }
 
+    private void Update()
+    {
+        // Check if the sprite renderer is active.
+        if (spriteRenderer.enabled)
+        {
+            activeTimer += Time.deltaTime;
+
+            // If the timer exceeds 5 seconds and the game is not over, trigger game over.
+            if (activeTimer >= 5f && !gameIsOver)
+            {
+                Debug.Log("Game Over");
+                gameIsOver = true;
+                // You can add your game over logic here, such as showing a game over screen or restarting the level.
+            }
+        }
+        else
+        {
+            // Reset the timer when the sprite renderer is not active.
+            activeTimer = 0f;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("PoliceBike") || other.CompareTag("PoliceCar"))
+        if (other.CompareTag("PoliceBike")||other.CompareTag("PoliceCar"))
         {
             Debug.Log("Police Car entered");
             policeCarCount++;
@@ -45,4 +70,5 @@ public class BustingArea : MonoBehaviour
             }
         }
     }
+    
 }
