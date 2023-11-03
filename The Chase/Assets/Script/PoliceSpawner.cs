@@ -29,6 +29,7 @@ public class PoliceSpawner : MonoBehaviour
             if(spawnPolice)
             {
                 SpawnCar();
+                Debug.Log("Police Spawned");
             }
             
             timeSinceLastSpawn = 0;
