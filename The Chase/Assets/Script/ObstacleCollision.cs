@@ -10,5 +10,6 @@ public class ObstacleCollision : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
     }
 }

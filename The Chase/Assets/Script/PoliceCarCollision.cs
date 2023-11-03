@@ -7,17 +7,22 @@ public class PoliceCarCollision : MonoBehaviour
     private int collisionCount = 0;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("PoliceCar"))
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+
+        bool bikeCollision = collision.gameObject.CompareTag("PoliceBike");
+        bool carCollision = collision.gameObject.CompareTag("PoliceCar");
+        bool swatCollision = collision.gameObject.CompareTag("SwatCar");
+        bool baricetCollision = collision.gameObject.CompareTag("Baricet");
+        bool playerCollision = collision.gameObject.CompareTag("PlayerCar");
+
+
+        if (swatCollision || baricetCollision || playerCollision || carCollision)
         {
             Destroy(gameObject);
-            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-            if (scoreManager != null)
-            {
-                scoreManager.IncreaseBountyOnDestroy(50); // Adjust the bounty amount as needed.
-            }
+            scoreManager.IncreaseBountyOnDestroy(50);
         }
 
-        if (collision.gameObject.CompareTag("PoliceBike"))
+        if (bikeCollision)
         {
             collisionCount++; // Increment the collision count when colliding with a police bike.
 
@@ -25,7 +30,7 @@ public class PoliceCarCollision : MonoBehaviour
             if (collisionCount >= 3)
             {
                 Destroy(gameObject);
-                ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+                
                 if (scoreManager != null)
                 {
                     scoreManager.IncreaseBountyOnDestroy(25); // Adjust the bounty amount as needed.
@@ -34,6 +39,8 @@ public class PoliceCarCollision : MonoBehaviour
                 collisionCount = 0;
             }
         }
+        
+        
     }
 
 
