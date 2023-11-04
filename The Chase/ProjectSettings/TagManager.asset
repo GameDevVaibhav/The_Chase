@@ -9,6 +9,7 @@ TagManager:
   - SwatCar
   - Baricet
   - PlayerCar
+  - SpeedBooster
   layers:
   - Default
   - TransparentFX

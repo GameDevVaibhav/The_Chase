@@ -10,6 +10,9 @@ public class ObstacleCollision : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+        if (collision.gameObject.CompareTag("PlayerCar"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
