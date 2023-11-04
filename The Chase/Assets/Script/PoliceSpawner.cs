@@ -8,7 +8,7 @@ public class PoliceSpawner : MonoBehaviour
     public Transform playerCarTransform; // Reference to the player car's transform.
     public float spawnInterval = 3.0f; // Time interval between spawns.
     public float spawnXOffset = 10.0f; // Offset from the camera's view on the x-axis.
-    public bool spawnPolice = false;
+    
     public GameObject swatCarPrefab;
 
     private Camera mainCamera;
@@ -25,12 +25,11 @@ public class PoliceSpawner : MonoBehaviour
 
         if (timeSinceLastSpawn >= spawnInterval)
         {
-            CheckForSwatCars();
-            if(spawnPolice)
-            {
+            
+           
                 SpawnCar();
                 Debug.Log("Police Spawned");
-            }
+            
             
             timeSinceLastSpawn = 0;
         }
@@ -61,19 +60,5 @@ public class PoliceSpawner : MonoBehaviour
         return new Vector3(randomX, spawnY, 0);
     }
 
-    private void CheckForSwatCars()
-    {
-        GameObject[] swatCars = GameObject.FindGameObjectsWithTag("SwatCar");
-
-        if (swatCars.Length > 0)
-        {
-            spawnPolice = false;
-            
-        }
-        else
-        {
-            spawnPolice = true;
-            
-        }
-    }
+    
 }

@@ -207,7 +207,7 @@ MonoBehaviour:
   cashPickupPrefab: {fileID: 1379128862910228074, guid: 74254258efacc304686e1a42fea66400, type: 3}
   playerCarTransform: {fileID: 544175396}
   yOffset: 5
-  spawnInterval: 10
+  speedSpawnInterval: 10
   cashSpawnInterval: 5
 --- !u!4 &151833175
 Transform:
@@ -543,7 +543,6 @@ MonoBehaviour:
   playerCarTransform: {fileID: 544175396}
   spawnInterval: 10
   spawnXOffset: 11
-  spawnPolice: 1
   swatCarPrefab: {fileID: 6406599219959968619, guid: 7efe20a41317c8f4c8430aa2f1303df8, type: 3}
 --- !u!4 &470734352
 Transform:
@@ -1592,7 +1591,6 @@ MonoBehaviour:
   playerCarTransform: {fileID: 544175396}
   spawnInterval: 4
   spawnXOffset: 10
-  spawnPolice: 0
   swatCarPrefab: {fileID: 0}
 --- !u!1 &1627058321
 GameObject:

@@ -4,35 +4,39 @@ using UnityEngine;
 
 public class PlayerCarCollision : MonoBehaviour
 {
-    public int playerHealth = 10;
+    public float playerHealth = 10f;
     private float lastCollisionTime = 0f;
     private float timeBetweenCollisions = 4f; // Set the time limit for resetting health here.
+    private float swatCarDamageInterval = 1.0f; // Time interval to reduce health if a SwatCar is in the scene.
+    private float lastSwatCarDamageTime = 0f;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("PoliceCar"))
         {
-            playerHealth -= 5; // Reduce health by 5 when a car collides.
-            
+            playerHealth -= 5f; // Reduce health by 5 when a car collides.
         }
         else if (collision.gameObject.CompareTag("PoliceBike"))
         {
-            playerHealth -= 3; // Reduce health by 3 when a bike collides.
+            playerHealth -= 3f; // Reduce health by 3 when a bike collides.
         }
         else if (collision.gameObject.CompareTag("Baricet"))
         {
-            playerHealth -= 7; // Reduce health by 7 when a barrier collides.
+            playerHealth -= 7f; // Reduce health by 7 when a barrier collides.
         }
-        
 
         lastCollisionTime = Time.time; // Update the last collision time.
-        Debug.Log(playerHealth);
-        Debug.Log(lastCollisionTime);
+        Debug.Log("Player Health: " + playerHealth);
+        Debug.Log("Last Collision Time: " + lastCollisionTime);
     }
 
     private void Update()
     {
-        if (Time.time - lastCollisionTime >= timeBetweenCollisions)
+        if (SwatCarIsInScene())
+        {
+            ReduceHealthForSwatCar();
+        }
+        else if (Time.time - lastCollisionTime >= timeBetweenCollisions)
         {
             // If no collision within the specified time, reset player health.
             playerHealth = 10;
@@ -42,6 +46,22 @@ public class PlayerCarCollision : MonoBehaviour
         if (playerHealth <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private bool SwatCarIsInScene()
+    {
+        GameObject[] swatCars = GameObject.FindGameObjectsWithTag("SwatCar");
+        return swatCars.Length > 0;
+    }
+
+    private void ReduceHealthForSwatCar()
+    {
+        if (Time.time - lastSwatCarDamageTime >= swatCarDamageInterval)
+        {
+            playerHealth -= 0.3f; // Reduce health by 0.5 every second when a SwatCar is in the scene.
+            lastSwatCarDamageTime = Time.time; // Update the last time health was reduced.
+            Debug.Log("Player Health Reduced by SwatCar: " + playerHealth);
         }
     }
 }
