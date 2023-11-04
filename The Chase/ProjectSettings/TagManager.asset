@@ -10,6 +10,7 @@ TagManager:
   - Baricet
   - PlayerCar
   - SpeedBooster
+  - Cash
   layers:
   - Default
   - TransparentFX

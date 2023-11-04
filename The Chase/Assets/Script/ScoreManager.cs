@@ -7,8 +7,10 @@ public class ScoreManager : MonoBehaviour
 {
     public Text scoreText; // Reference to a Text component to display the score.
     public Text heatText; // Reference to a Text component to display the heat level.
+    public Text cashText;
     public int score = 0;
     private int heatLevel = 1;
+    private int cashCount = 0;
     public int currentThreshold = 100; // Initial threshold for heat level 2.
     private int incrementThreshold = 200;
     private int incrementThresholdMultiplier = 1;
@@ -23,6 +25,7 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = score.ToString();
         heatText.text = heatLevel.ToString();
+        cashText.text = cashCount.ToString();
     }
 
     private void Update()
@@ -34,6 +37,7 @@ public class ScoreManager : MonoBehaviour
             IncreaseScore(1); // Increase score by 1 point every updateInterval seconds.
             timeSinceLastUpdate = 0;
         }
+        
     }
 
     public void IncreaseScore(int amount)
@@ -54,6 +58,12 @@ public class ScoreManager : MonoBehaviour
                 OnHeatLevelChanged(heatLevel);
             }
         }
+    }
+
+    public void IncreaseCash(int amount)
+    {
+        cashCount += amount;
+        cashText.text = cashCount.ToString();
     }
 
     private void UpdateHeatThreshold()

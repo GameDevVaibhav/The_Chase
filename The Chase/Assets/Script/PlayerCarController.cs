@@ -15,12 +15,14 @@ public class PlayerCarController : MonoBehaviour
     float originalMoveSpeed;
 
     Rigidbody2D myRigidBody;
+    ScoreManager scoreManager;
 
     // Start is called before the first frame update
     void Start()
     {
         myRigidBody = GetComponent < Rigidbody2D>();
         originalMoveSpeed = moveSpeed;
+        scoreManager=FindObjectOfType<ScoreManager>();
     }
 
     void Update()
@@ -40,7 +42,12 @@ public class PlayerCarController : MonoBehaviour
         if (other.CompareTag("SpeedBooster"))
         {
             ApplySpeedBoost();
-            Destroy(other.gameObject); // Destroy the pickup.
+            Destroy(other.gameObject); 
+        }
+        if (other.CompareTag("Cash"))
+        {
+            scoreManager.IncreaseCash(10);
+            Destroy(other.gameObject);
         }
     }
 

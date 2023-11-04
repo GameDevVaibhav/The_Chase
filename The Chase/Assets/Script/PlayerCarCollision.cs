@@ -23,6 +23,7 @@ public class PlayerCarCollision : MonoBehaviour
         {
             playerHealth -= 7; // Reduce health by 7 when a barrier collides.
         }
+        
 
         lastCollisionTime = Time.time; // Update the last collision time.
         Debug.Log(playerHealth);
