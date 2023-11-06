@@ -57,9 +57,13 @@ public class PlayerCarCollision : MonoBehaviour
         {
             swatCarDamage = 0.15f * 2;
         }
-        if (swatCars.Length == 1)
+        else if (swatCars.Length == 1)
         {
             swatCarDamage = 0.15f;
+        }
+        else
+        {
+            swatCarDamage= 0f;
         }
 
         return swatCarDamage> 0;

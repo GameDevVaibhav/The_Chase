@@ -48,3 +48,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Busting Area
+    uniqueID: 2838056047
+    locked: 0
+  - name: Baricet
+    uniqueID: 3971068977
+    locked: 0
+  - name: Cash
+    uniqueID: 3055249751
+    locked: 0
+  - name: Speed boost
+    uniqueID: 1403780105
+    locked: 0
+  - name: Police
+    uniqueID: 740683407
+    locked: 0
+  - name: Player Car
+    uniqueID: 2035169515
+    locked: 0
+  - name: Swat Cat
+    uniqueID: 2945010563
+    locked: 0
