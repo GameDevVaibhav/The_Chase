@@ -9,7 +9,7 @@ public class ObstacleSpawner : MonoBehaviour
     public float spawnInterval = 4.0f; // Time interval between spawning.
     public float yOffset = 5.0f; // Vertical offset for spawning (adjust as needed).
     public Transform playerCarTransform; // Reference to the player car's transform.
-    public bool spawnObstacle=false;
+    public bool spawnObstacle=true;
 
     private Camera mainCamera;
     private float timeSinceLastSpawn = 0;
@@ -25,12 +25,11 @@ public class ObstacleSpawner : MonoBehaviour
 
         if (timeSinceLastSpawn >= spawnInterval)
         {
-            if(spawnObstacle)
-            {
+           
                 SpawnObstacles();
-            }
+            Debug.Log("Baricet Spawn");
             
-            CheckForSwatCars();
+            //CheckForSwatCars();
             timeSinceLastSpawn = 0;
         }
     }
@@ -45,17 +44,17 @@ public class ObstacleSpawner : MonoBehaviour
         Destroy(barrier1, 10.0f);
     }
 
-    private void CheckForSwatCars()
-    {
-        GameObject[] swatCars = GameObject.FindGameObjectsWithTag("SwatCar");
+    //private void CheckForSwatCars()
+    //{
+    //    GameObject[] swatCars = GameObject.FindGameObjectsWithTag("SwatCar");
 
-        if (swatCars.Length > 0)
-        {
-           spawnObstacle= true;
-        }
-        else
-        {
-            spawnObstacle= false;
-        }
-    }
+    //    if (swatCars.Length > 0)
+    //    {
+    //       spawnObstacle= true;
+    //    }
+    //    else
+    //    {
+    //        spawnObstacle= false;
+    //    }
+    //}
 }

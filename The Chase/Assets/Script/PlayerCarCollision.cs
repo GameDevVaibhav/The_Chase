@@ -15,7 +15,7 @@ public class PlayerCarCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PoliceCar"))
         {
-            playerHealth -= 5f; // Reduce health by 5 when a car collides.
+            playerHealth -= 4f; // Reduce health by 5 when a car collides.
         }
         else if (collision.gameObject.CompareTag("PoliceBike"))
         {
@@ -23,7 +23,7 @@ public class PlayerCarCollision : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Baricet"))
         {
-            playerHealth -= 7f; // Reduce health by 7 when a barrier collides.
+            playerHealth -= 5f; // Reduce health by 7 when a barrier collides.
         }
 
         lastCollisionTime = Time.time; // Update the last collision time.
