@@ -69,3 +69,6 @@ TagManager:
   - name: Swat Cat
     uniqueID: 2945010563
     locked: 0
+  - name: Siren
+    uniqueID: 2407323823
+    locked: 0
