@@ -13,6 +13,8 @@ public class PlayerCarController : MonoBehaviour
     [SerializeField]
     float speedBoostDuration = 3.0f;
     float originalMoveSpeed;
+    [SerializeField]
+    private Transform target;
 
     Rigidbody2D myRigidBody;
     ScoreManager scoreManager;
@@ -27,14 +29,26 @@ public class PlayerCarController : MonoBehaviour
 
     void Update()
     {
-        input = Input.GetAxis("Horizontal");
+       input = Input.GetAxis("Horizontal");
+        Debug.Log(input);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        // Calculate the direction from the player to the target
+        Vector3 directionToTarget = target.position - transform.position;
+
+        // Calculate the angle to rotate the player to face the target
+        float angleToTarget = Mathf.Atan2(directionToTarget.x, directionToTarget.y) * Mathf.Rad2Deg;
+
+        // Rotate the player to face the target
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, -angleToTarget);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, steer * Time.fixedDeltaTime);
+
+        // Move the player perpendicular to the target
         myRigidBody.velocity = transform.up * moveSpeed * Time.fixedDeltaTime * 10f;
-        myRigidBody.angularVelocity = -input * steer * 10f;
+        //myRigidBody.angularVelocity = -input * steer * 10f;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
