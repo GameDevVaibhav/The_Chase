@@ -10,10 +10,10 @@ public class PickupSpawner : MonoBehaviour
     public float yOffset = 5.0f; // Vertical offset for spawning (adjust as needed).
     public float speedSpawnInterval = 10.0f; // Time interval between spawning pickups.
     public float cashSpawnInterval = 5.0f; // Time interval between spawning CashPickups.
+    public Transform[] speedBoostSpawnPoints; // Array of spawn points for speed boost pickups.
+    public Transform[] cashSpawnPoints; // Array of spawn points for cash pickups.
     private float timeSinceLastSpawn = 0;
     private float timeSinceLastCashSpawn = 0;
-
-   
 
     private Camera mainCamera;
 
@@ -24,13 +24,12 @@ public class PickupSpawner : MonoBehaviour
 
     private void Update()
     {
-
         timeSinceLastSpawn += Time.deltaTime;
         timeSinceLastCashSpawn += Time.deltaTime;
 
         if (timeSinceLastSpawn >= speedSpawnInterval)
         {
-            speedBoostPickup();
+            SpawnSpeedBoostPickup();
             timeSinceLastSpawn = 0;
         }
 
@@ -41,32 +40,47 @@ public class PickupSpawner : MonoBehaviour
         }
     }
 
-
-    private System.Random speedBoostRandomGenerator = new System.Random();
-    private System.Random cashRandomGenerator = new System.Random();
-
- 
-
-    private Vector3 GetRandomSpawnPosition(System.Random randomGenerator)
+    private void SpawnSpeedBoostPickup()
     {
+        if (speedBoostSpawnPoints.Length == 0)
+        {
+            Debug.LogWarning("No speed boost spawn points assigned to the PickupSpawner.");
+            return;
+        }
+
+        // Select a random spawn point from the array.
+        int randomIndex = Random.Range(0, speedBoostSpawnPoints.Length);
+        Transform spawnPoint = speedBoostSpawnPoints[randomIndex];
+
         float camHeight = mainCamera.orthographicSize;
         float camWidth = camHeight * mainCamera.aspect;
-        float randomX = (float)(randomGenerator.NextDouble() * (2 * camWidth) - camWidth);
-        Vector3 spawnPosition = playerCarTransform.position + new Vector3(randomX, camHeight + yOffset, 0);
-        return spawnPosition;
-    }
+        float randomX = Random.Range(-camWidth, camWidth);
 
- 
+        // Use the selected spawn point to determine the position of the pickup.
+        Vector3 spawnPosition = spawnPoint.position + new Vector3(randomX, camHeight + yOffset, 0);
 
-    private void speedBoostPickup()
-    {
-        Vector3 spawnPosition = GetRandomSpawnPosition(speedBoostRandomGenerator);
         Instantiate(pickupPrefab, spawnPosition, Quaternion.identity);
     }
 
     private void SpawnCashPickup()
     {
-        Vector3 spawnPosition = GetRandomSpawnPosition(cashRandomGenerator);
+        if (cashSpawnPoints.Length == 0)
+        {
+            Debug.LogWarning("No cash pickup spawn points assigned to the PickupSpawner.");
+            return;
+        }
+
+        // Select a random spawn point from the array.
+        int randomIndex = Random.Range(0, cashSpawnPoints.Length);
+        Transform spawnPoint = cashSpawnPoints[randomIndex];
+
+        float camHeight = mainCamera.orthographicSize;
+        float camWidth = camHeight * mainCamera.aspect;
+        float randomX = Random.Range(-camWidth, camWidth);
+
+        // Use the selected spawn point to determine the position of the cash pickup.
+        Vector3 spawnPosition = spawnPoint.position + new Vector3(randomX, camHeight + yOffset, 0);
+
         Instantiate(cashPickupPrefab, spawnPosition, Quaternion.identity);
     }
 }

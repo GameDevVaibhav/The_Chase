@@ -6,18 +6,10 @@ public class PoliceSpawner : MonoBehaviour
 {
     public GameObject policeCarPrefab; // Reference to the police car prefab.
     public Transform playerCarTransform; // Reference to the player car's transform.
+    public Transform[] spawnPoints; // Array of spawn points for police cars.
     public float spawnInterval = 3.0f; // Time interval between spawns.
-    public float spawnXOffset = 10.0f; // Offset from the camera's view on the x-axis.
-    
-    public GameObject swatCarPrefab;
 
-    private Camera mainCamera;
     private float timeSinceLastSpawn = 0;
-
-    private void Start()
-    {
-        mainCamera = Camera.main;
-    }
 
     private void Update()
     {
@@ -25,20 +17,25 @@ public class PoliceSpawner : MonoBehaviour
 
         if (timeSinceLastSpawn >= spawnInterval)
         {
-            
-           
-                SpawnCar();
-                Debug.Log("Police Spawned");
-            
-            
+            SpawnCar();
             timeSinceLastSpawn = 0;
         }
     }
 
     private void SpawnCar()
     {
-        Vector3 spawnPosition = GetRandomSpawnPosition();
-        GameObject policeCar = Instantiate(policeCarPrefab, spawnPosition, Quaternion.identity);
+        if (spawnPoints.Length == 0)
+        {
+            Debug.LogWarning("No spawn points assigned to the PoliceSpawner.");
+            return;
+        }
+
+        // Select a random spawn point from the array.
+        int randomIndex = Random.Range(0, spawnPoints.Length);
+        Transform spawnPoint = spawnPoints[randomIndex];
+
+        // Spawn the police car at the selected spawn point.
+        GameObject policeCar = Instantiate(policeCarPrefab, spawnPoint.position, Quaternion.identity);
 
         // Assign the player car as the target to the police car.
         PoliceCarMovement policeCarMovement = policeCar.GetComponent<PoliceCarMovement>();
@@ -48,17 +45,5 @@ public class PoliceSpawner : MonoBehaviour
         }
     }
 
-    private Vector3 GetRandomSpawnPosition()
-    {
 
-        float camHeight = mainCamera.orthographicSize;
-        float camWidth = camHeight * mainCamera.aspect;
-
-        float randomX = Random.Range(-camWidth + spawnXOffset, camWidth - spawnXOffset);
-        float spawnY = camHeight + 2; // Adjust the spawn height as needed.
-
-        return new Vector3(randomX, spawnY, 0);
-    }
-
-    
 }
