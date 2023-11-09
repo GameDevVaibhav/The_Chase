@@ -301,7 +301,7 @@ MonoBehaviour:
   pickupPrefab: {fileID: 1834562571607951671, guid: 7d37e0f08b4fce64fa1022037f0837c3, type: 3}
   cashPickupPrefab: {fileID: 1379128862910228074, guid: 74254258efacc304686e1a42fea66400, type: 3}
   playerCarTransform: {fileID: 544175396}
-  yOffset: 5
+  yOffset: 0
   speedSpawnInterval: 8
   cashSpawnInterval: 3
   speedBoostSpawnPoints:
@@ -1785,7 +1785,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
+  m_Color: {r: 0.9150943, g: 0.3401388, b: 0.6558778, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3297,7 +3297,7 @@ MonoBehaviour:
   - {fileID: 2080631959}
   - {fileID: 1842859325}
   spawnInterval: 2
-  yOffset: 5
+  yOffset: 0
   spawnObstacle: 0
 --- !u!1 &1875249617
 GameObject:

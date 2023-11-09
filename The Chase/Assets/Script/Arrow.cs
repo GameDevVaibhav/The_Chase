@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    private Vector3 initialMousePosition;
+    private Vector3 initialTouchPosition;
     private Vector3 initialObjectPosition;
     private bool isDragging = false;
     [SerializeField]
@@ -17,40 +15,45 @@ public class Arrow : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0) // Check if there are any touches
         {
-            initialMousePosition = Input.mousePosition;
-            initialObjectPosition = transform.position;
-            isDragging = true;
-        }
+            Touch touch = Input.GetTouch(0); // Get the first touch
 
-        if (isDragging)
-        {
-            Vector3 currentMousePosition = Input.mousePosition;
-            Vector3 mouseMovement = (currentMousePosition - initialMousePosition) * sensitivity;
-            initialMousePosition = currentMousePosition;
-
-            Vector3 newPosition = transform.position + new Vector3(mouseMovement.x, mouseMovement.y, 0f);
-
-            // Calculate the distance from the parent object's center
-            float distanceFromCenter = Vector3.Distance(parentObject.position, newPosition);
-
-            // Ensure the object stays within the circular boundary
-            if (distanceFromCenter <= maxDistanceFromCenter)
+            if (touch.phase == TouchPhase.Began)
             {
-                transform.position = newPosition;
+                initialTouchPosition = touch.position;
+                initialObjectPosition = transform.position;
+                isDragging = true;
             }
-            else
-            {
-                // If the object goes beyond the boundary, clamp it back
-                Vector3 directionFromCenter = (newPosition - parentObject.position).normalized;
-                transform.position = parentObject.position + directionFromCenter * maxDistanceFromCenter;
-            }
-        }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            isDragging = false;
+            if (isDragging)
+            {
+                Vector3 currentTouchPosition = touch.position;
+                Vector3 touchMovement = (currentTouchPosition - initialTouchPosition) * sensitivity;
+                initialTouchPosition = currentTouchPosition;
+
+                Vector3 newPosition = transform.position + new Vector3(touchMovement.x, touchMovement.y, 0f);
+
+                // Calculate the distance from the parent object's center
+                float distanceFromCenter = Vector3.Distance(parentObject.position, newPosition);
+
+                // Ensure the object stays within the circular boundary
+                if (distanceFromCenter <= maxDistanceFromCenter)
+                {
+                    transform.position = newPosition;
+                }
+                else
+                {
+                    // If the object goes beyond the boundary, clamp it back
+                    Vector3 directionFromCenter = (newPosition - parentObject.position).normalized;
+                    transform.position = parentObject.position + directionFromCenter * maxDistanceFromCenter;
+                }
+            }
+
+            if (touch.phase == TouchPhase.Ended)
+            {
+                isDragging = false;
+            }
         }
     }
 }
