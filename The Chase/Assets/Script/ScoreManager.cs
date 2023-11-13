@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
     public Text cashText;
     public int score = 0;
     private int heatLevel = 1;
-    private int cashCount = 0;
+    public int cashCount = 0;
     public int currentThreshold = 100; // Initial threshold for heat level 2.
     private int incrementThreshold = 200;
     private int incrementThresholdMultiplier = 1;

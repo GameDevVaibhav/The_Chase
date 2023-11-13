@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BustingArea : MonoBehaviour
 {
-
+    public GameOverUI gameOverUI;
 
     private SpriteRenderer spriteRenderer;
     private int policeCarCount = 0;
@@ -31,7 +31,7 @@ public class BustingArea : MonoBehaviour
             {
                 Debug.Log("Game Over");
                 gameIsOver = true;
-                // You can add your game over logic here, such as showing a game over screen or restarting the level.
+                gameOverUI.ShowGameOverUI();
             }
         }
         else

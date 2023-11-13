@@ -11,6 +11,8 @@ TagManager:
   - PlayerCar
   - SpeedBooster
   - Cash
+  - RightTrigger
+  - background
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Water
   - UI
   - Cash
-  - 
+  - background
   - 
   - 
   - 
@@ -47,6 +49,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 4040154139
     locked: 0
   - name: Busting Area
     uniqueID: 2838056047

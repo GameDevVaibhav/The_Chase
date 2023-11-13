@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCarCollision : MonoBehaviour
 {
+    public GameOverUI gameOverUI;
     public float playerHealth = 10f;
     private float lastCollisionTime = 0f;
     private float timeBetweenCollisions = 4f; // Set the time limit for resetting health here.
@@ -46,14 +47,16 @@ public class PlayerCarCollision : MonoBehaviour
         // Check for game over or other conditions based on player health.
         if (playerHealth <= 0)
         {
-            Destroy(gameObject);
+            
+            
+            gameOverUI.ShowGameOverUI();
         }
     }
 
     private bool SwatCarIsInScene()
     {
         GameObject[] swatCars = GameObject.FindGameObjectsWithTag("SwatCar");
-        if (swatCars.Length == 2)
+        if (swatCars.Length >= 2)
         {
             swatCarDamage = 0.15f * 2;
         }
