@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
@@ -8,14 +9,17 @@ public class GameOverUI : MonoBehaviour
 
     public ScoreManager scoreManager; // Reference to the ScoreManager script.
     public GameObject gameOverPanel; // Reference to the Game Over panel.
-
     public Text bountyText; // Reference to the Text component for displaying bounty.
     public Text cashText; // Reference to the Text component for displaying cash.
+    public Button restartButton; // Reference to the restart button.
 
     private void Start()
     {
         // Disable the Game Over panel initially.
         gameOverPanel.SetActive(false);
+
+        // Hook up the restart button to the RestartGame method.
+        restartButton.onClick.AddListener(RestartGame);
     }
 
     // Call this method when the game is over.
@@ -23,7 +27,7 @@ public class GameOverUI : MonoBehaviour
     {
         // Enable the Game Over panel.
         gameOverPanel.SetActive(true);
-        Debug.Log("Active UI");
+
         // Update the bounty and cash values on the Game Over panel.
         UpdateBountyText();
         UpdateCashText();
@@ -35,7 +39,7 @@ public class GameOverUI : MonoBehaviour
         int bountyValue = scoreManager.score;
 
         // Update the Text component on the Game Over panel.
-        bountyText.text = bountyValue.ToString();
+        bountyText.text =   bountyValue.ToString();
     }
 
     private void UpdateCashText()
@@ -44,6 +48,12 @@ public class GameOverUI : MonoBehaviour
         int cashValue = scoreManager.cashCount;
 
         // Update the Text component on the Game Over panel.
-        cashText.text = cashValue.ToString();
+        cashText.text =  cashValue.ToString();
+    }
+
+    private void RestartGame()
+    {
+        // Reload the current scene to restart the game.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
