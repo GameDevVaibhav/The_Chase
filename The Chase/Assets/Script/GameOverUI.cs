@@ -12,6 +12,7 @@ public class GameOverUI : MonoBehaviour
     public Text bountyText; // Reference to the Text component for displaying bounty.
     public Text cashText; // Reference to the Text component for displaying cash.
     public Button restartButton; // Reference to the restart button.
+    public Button homeButton;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class GameOverUI : MonoBehaviour
 
         // Hook up the restart button to the RestartGame method.
         restartButton.onClick.AddListener(RestartGame);
+        homeButton.onClick.AddListener(MainMenu);
     }
 
     // Call this method when the game is over.
@@ -55,5 +57,10 @@ public class GameOverUI : MonoBehaviour
     {
         // Reload the current scene to restart the game.
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void MainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }

@@ -2819,6 +2819,7 @@ MonoBehaviour:
   bountyText: {fileID: 314149905}
   cashText: {fileID: 27445775}
   restartButton: {fileID: 1321133984}
+  homeButton: {fileID: 438240494}
 --- !u!1 &1179432362
 GameObject:
   m_ObjectHideFlags: 0
@@ -3947,7 +3948,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
