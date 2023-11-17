@@ -13,17 +13,18 @@ public class PoliceCarMovement : MonoBehaviour
     public Transform target;
     float input;
 
-
+    
     Rigidbody2D myRigidBody;
     // Start is called before the first frame update
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
-
+        
+        
     }
     void Update()
     {
-       // input = Input.GetAxis("Horizontal");
+     
 
     }
 
@@ -34,6 +35,8 @@ public class PoliceCarMovement : MonoBehaviour
         Vector2 direction = (target.position - transform.position).normalized+ new Vector3(offset,0f,0f);
         float rotationSteer=Vector3.Cross(transform.up,direction).z;
         myRigidBody.angularVelocity = rotationSteer * steer * 10f;
-        
+
+       
+       
     }
 }

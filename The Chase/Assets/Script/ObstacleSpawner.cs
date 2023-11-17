@@ -25,7 +25,7 @@ public class ObstacleSpawner : MonoBehaviour
         if (timeSinceLastSpawn >= spawnInterval)
         {
             SpawnObstacles();
-            Debug.Log("Barrier Spawn");
+           
 
             timeSinceLastSpawn = 0;
         }
@@ -35,7 +35,7 @@ public class ObstacleSpawner : MonoBehaviour
     {
         if (obstacleSpawnPoints.Length == 0)
         {
-            Debug.LogWarning("No obstacle spawn points assigned to the ObstacleSpawner.");
+           
             return;
         }
 

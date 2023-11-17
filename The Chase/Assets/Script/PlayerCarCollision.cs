@@ -18,7 +18,7 @@ public class PlayerCarCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("PoliceCar"))
         {
             playerHealth -= 4f; // Reduce health by 5 when a car collides.
-            
+            handleVibration.TriggerShortVibration();
         }
         else if (collision.gameObject.CompareTag("PoliceBike"))
         {
@@ -32,11 +32,7 @@ public class PlayerCarCollision : MonoBehaviour
         }
 
         lastCollisionTime = Time.time; // Update the last collision time.
-        Debug.Log("Player Health: " + playerHealth);
-        Debug.Log("Last Collision Time: " + lastCollisionTime);
-
-        // Trigger haptic feedback on collision.
-        // Trigger short vibration on collision.
+        
         
     }
 
@@ -90,7 +86,7 @@ public class PlayerCarCollision : MonoBehaviour
         {
             playerHealth -= swatCarDamage; // Reduce health by 0.5 every second when a SwatCar is in the scene.
             lastSwatCarDamageTime = Time.time; // Update the last time health was reduced.
-            Debug.Log("Player Health Reduced by SwatCar: " + playerHealth);
+            
 
           
         }

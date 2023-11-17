@@ -8,8 +8,12 @@ public class PoliceCarCollision : MonoBehaviour
     private int collisionCount = 0;
 
     public GameObject impactPrefab;
+    
 
-
+    private void Start()
+    {
+        
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
@@ -23,14 +27,17 @@ public class PoliceCarCollision : MonoBehaviour
 
         if (swatCollision || baricetCollision || playerCollision || carCollision)
         {
-            Destroy(gameObject);
-            InstantiateImpactPrefab(collision.contacts[0].point);
-            scoreManager.IncreaseBountyOnDestroy(50);
             HandleVibration handleVibration = GetComponent<HandleVibration>();
             if (handleVibration != null)
             {
                 handleVibration.TriggerLongVibration();
+                Debug.Log("Vibrate long");
             }
+            Destroy(gameObject);
+            
+            InstantiateImpactPrefab(collision.contacts[0].point);
+            scoreManager.IncreaseBountyOnDestroy(50);
+            
         }
 
         if (bikeCollision)
@@ -41,11 +48,13 @@ public class PoliceCarCollision : MonoBehaviour
             if (collisionCount >= 3)
             {
                 Destroy(gameObject);
+                
                 InstantiateImpactPrefab(collision.contacts[0].point);
                 HandleVibration handleVibration = GetComponent<HandleVibration>();
                 if (handleVibration != null)
                 {
                     handleVibration.TriggerShortVibration();
+                    Debug.Log("Car Bike");
                 }
 
                 if (scoreManager != null)

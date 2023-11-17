@@ -5,6 +5,7 @@ using UnityEngine;
 public class PoliceBikeCollision : MonoBehaviour
 {
     public GameObject impactPrefab;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         bool bikeCollision = collision.gameObject.CompareTag("PoliceBike");
@@ -14,14 +15,17 @@ public class PoliceBikeCollision : MonoBehaviour
         bool playerCollision = collision.gameObject.CompareTag("PlayerCar");
 
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        HandleVibration handleVibration = FindObjectOfType<HandleVibration>();
         if (bikeCollision)
         {
 
-            HandleVibration handleVibration = GetComponent<HandleVibration>();
+            
             if (handleVibration != null)
             {
                 handleVibration.TriggerShortVibration();
+                Debug.Log("Bike Bike");
             }
+            
             Destroy(gameObject);
             InstantiateImpactPrefab(collision.contacts[0].point);
 
@@ -32,7 +36,7 @@ public class PoliceBikeCollision : MonoBehaviour
         }
         if (carCollision || swatCollision || baricetCollision||playerCollision)
         {
-            HandleVibration handleVibration = GetComponent<HandleVibration>();
+            
             if (handleVibration != null)
             {
                 handleVibration.TriggerShortVibration();

@@ -30,7 +30,7 @@ public class PlayerCarController : MonoBehaviour
     void Update()
     {
        input = Input.GetAxis("Horizontal");
-        Debug.Log(input);
+        
     }
 
     // Update is called once per frame

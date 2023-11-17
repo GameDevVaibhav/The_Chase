@@ -46,7 +46,7 @@ public class BustingArea : MonoBehaviour
     {
         if (other.CompareTag("PoliceBike")||other.CompareTag("PoliceCar"))
         {
-            Debug.Log("Police Car entered");
+            
             policeCarCount++;
             // Enable the sprite when at least one police car enters.
             if (policeCarCount > 0)
@@ -62,7 +62,7 @@ public class BustingArea : MonoBehaviour
     {
         if (other.CompareTag("PoliceBike") || other.CompareTag("PoliceCar"))
         {
-            Debug.Log("Police Car Exit");
+            
             policeCarCount--;
             // Disable the sprite when there are no police cars in the area.
             if (policeCarCount == 0)
