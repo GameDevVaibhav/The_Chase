@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PoliceCarCollision : MonoBehaviour
 {
     private int collisionCount = 0;
+
+    public GameObject impactPrefab;
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
@@ -19,7 +24,13 @@ public class PoliceCarCollision : MonoBehaviour
         if (swatCollision || baricetCollision || playerCollision || carCollision)
         {
             Destroy(gameObject);
+            InstantiateImpactPrefab(collision.contacts[0].point);
             scoreManager.IncreaseBountyOnDestroy(50);
+            HandleVibration handleVibration = GetComponent<HandleVibration>();
+            if (handleVibration != null)
+            {
+                handleVibration.TriggerLongVibration();
+            }
         }
 
         if (bikeCollision)
@@ -30,7 +41,13 @@ public class PoliceCarCollision : MonoBehaviour
             if (collisionCount >= 3)
             {
                 Destroy(gameObject);
-                
+                InstantiateImpactPrefab(collision.contacts[0].point);
+                HandleVibration handleVibration = GetComponent<HandleVibration>();
+                if (handleVibration != null)
+                {
+                    handleVibration.TriggerShortVibration();
+                }
+
                 if (scoreManager != null)
                 {
                     scoreManager.IncreaseBountyOnDestroy(25); // Adjust the bounty amount as needed.
@@ -41,6 +58,15 @@ public class PoliceCarCollision : MonoBehaviour
         }
         
         
+    }
+
+    private void InstantiateImpactPrefab(Vector2 position)
+    {
+        // Instantiate the impact prefab at the specified position.
+        if (impactPrefab != null)
+        {
+            Instantiate(impactPrefab, position, Quaternion.identity);
+        }
     }
 
 

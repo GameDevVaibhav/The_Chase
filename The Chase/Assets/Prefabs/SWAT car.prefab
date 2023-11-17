@@ -1336,6 +1336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc00e5fc7f9e2e46817d0603ee84c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactPrefab: {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b, type: 3}
 --- !u!61 &-7577558415382502480
 BoxCollider2D:
   m_ObjectHideFlags: 0

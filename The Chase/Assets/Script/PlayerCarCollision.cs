@@ -11,25 +11,33 @@ public class PlayerCarCollision : MonoBehaviour
     private float swatCarDamageInterval = 1.0f; // Time interval to reduce health if a SwatCar is in the scene.
     private float lastSwatCarDamageTime = 0f;
     private float swatCarDamage;
+    public HandleVibration handleVibration;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("PoliceCar"))
         {
             playerHealth -= 4f; // Reduce health by 5 when a car collides.
+            
         }
         else if (collision.gameObject.CompareTag("PoliceBike"))
         {
             playerHealth -= 3f; // Reduce health by 3 when a bike collides.
+            handleVibration.TriggerShortVibration();
         }
         else if (collision.gameObject.CompareTag("Baricet"))
         {
             playerHealth -= 5f; // Reduce health by 7 when a barrier collides.
+            handleVibration.TriggerShortVibration();
         }
 
         lastCollisionTime = Time.time; // Update the last collision time.
         Debug.Log("Player Health: " + playerHealth);
         Debug.Log("Last Collision Time: " + lastCollisionTime);
+
+        // Trigger haptic feedback on collision.
+        // Trigger short vibration on collision.
+        
     }
 
     private void Update()
@@ -47,8 +55,12 @@ public class PlayerCarCollision : MonoBehaviour
         // Check for game over or other conditions based on player health.
         if (playerHealth <= 0)
         {
-            
-            
+            HandleVibration handleVibration = GetComponent<HandleVibration>();
+            if (handleVibration != null)
+            {
+                handleVibration.TriggerLongVibration();
+            }
+
             gameOverUI.ShowGameOverUI();
         }
     }
@@ -79,6 +91,10 @@ public class PlayerCarCollision : MonoBehaviour
             playerHealth -= swatCarDamage; // Reduce health by 0.5 every second when a SwatCar is in the scene.
             lastSwatCarDamageTime = Time.time; // Update the last time health was reduced.
             Debug.Log("Player Health Reduced by SwatCar: " + playerHealth);
+
+          
         }
     }
+
+   
 }

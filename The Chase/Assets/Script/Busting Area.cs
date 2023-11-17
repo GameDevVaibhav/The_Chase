@@ -27,11 +27,12 @@ public class BustingArea : MonoBehaviour
             activeTimer += Time.deltaTime;
 
             // If the timer exceeds 5 seconds and the game is not over, trigger game over.
-            if (activeTimer >= 5f && !gameIsOver)
+            if (activeTimer >= 4f && !gameIsOver)
             {
-                Debug.Log("Game Over");
-                gameIsOver = true;
+                Debug.Log("Busted");
                 gameOverUI.ShowGameOverUI();
+                gameIsOver = true;
+                
             }
         }
         else
