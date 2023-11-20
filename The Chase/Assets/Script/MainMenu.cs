@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ public class MainMenu : MonoBehaviour
     public Button button2;
     public Button button3;
     public Button button4;
+
+    public string selectedColor;
 
     private bool colorPanelActive = false;
 
@@ -37,6 +40,10 @@ public class MainMenu : MonoBehaviour
     private void PlayGame()
     {
         // Load the gameplay scene when the Play button is clicked.
+        
+        PlayerPrefs.SetString("selectedColor", selectedColor);
+        PlayerPrefs.Save();
+        Debug.Log(selectedColor);
         SceneManager.LoadScene("Chase"); // Replace "GameplayScene" with the actual name of your gameplay scene.
     }
 
@@ -48,12 +55,15 @@ public class MainMenu : MonoBehaviour
 
     private void ChangeCameraColor(string hexColor)
     {
+        selectedColor= hexColor;
         Color newColor;
         ColorUtility.TryParseHtmlString(hexColor, out newColor);
         // Change the background color of the main camera.
         if (mainCamera != null)
         {
             mainCamera.backgroundColor = newColor;
+            
+            Debug.Log(selectedColor);
         }
         else
         {
