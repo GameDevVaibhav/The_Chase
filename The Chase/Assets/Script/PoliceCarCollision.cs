@@ -54,7 +54,7 @@ public class PoliceCarCollision : MonoBehaviour
                 if (handleVibration != null)
                 {
                     handleVibration.TriggerShortVibration();
-                    Debug.Log("Car Bike");
+                    
                 }
 
                 if (scoreManager != null)

@@ -9,10 +9,12 @@ public class BustingArea : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private int policeCarCount = 0;
     public float activeTimer = 0f;
-    private bool gameIsOver = false;
+    //private bool gameIsOver = false;
+    private PlayerCarCollision playerCarCollision;
 
     private void Start()
     {
+        playerCarCollision = FindObjectOfType<PlayerCarCollision>();
         // Get the SpriteRenderer component attached to the GameObject.
         spriteRenderer = GetComponent < SpriteRenderer>();
         // Initially, the sprite should be invisible (disabled).
@@ -27,11 +29,12 @@ public class BustingArea : MonoBehaviour
             activeTimer += Time.deltaTime;
 
             // If the timer exceeds 5 seconds and the game is not over, trigger game over.
-            if (activeTimer >= 4f && !gameIsOver)
+            if (activeTimer >= 4f && !playerCarCollision.isGameOver)
             {
                 Debug.Log("Busted");
                 gameOverUI.ShowGameOverUI();
-                gameIsOver = true;
+                playerCarCollision.isGameOver = true;
+                playerCarCollision.canMove= false;
                 
             }
         }

@@ -1730,6 +1730,8 @@ MonoBehaviour:
   gameOverUI: {fileID: 1137897230}
   playerHealth: 10
   handleVibration: {fileID: 1140710778}
+  canMove: 1
+  isGameOver: 0
 --- !u!96 &544175401
 TrailRenderer:
   serializedVersion: 3
@@ -3618,6 +3620,7 @@ MonoBehaviour:
   score: 0
   cashCount: 0
   currentThreshold: 100
+  playerCarCollision: {fileID: 544175400}
 --- !u!4 &1682125107
 Transform:
   m_ObjectHideFlags: 0

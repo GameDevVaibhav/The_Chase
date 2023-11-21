@@ -13,27 +13,32 @@ public class PlayerCarCollision : MonoBehaviour
     private float swatCarDamage;
     public HandleVibration handleVibration;
 
+    public bool canMove = true;
+    public bool isGameOver = false;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("PoliceCar"))
+        if (canMove) // Only process collisions if the car can move.
         {
-            playerHealth -= 4f; // Reduce health by 5 when a car collides.
-            handleVibration.TriggerShortVibration();
-        }
-        else if (collision.gameObject.CompareTag("PoliceBike"))
-        {
-            playerHealth -= 3f; // Reduce health by 3 when a bike collides.
-            handleVibration.TriggerShortVibration();
-        }
-        else if (collision.gameObject.CompareTag("Baricet"))
-        {
-            playerHealth -= 5f; // Reduce health by 7 when a barrier collides.
-            handleVibration.TriggerShortVibration();
+            if (collision.gameObject.CompareTag("PoliceCar"))
+            {
+                playerHealth -= 4f; // Reduce health by 5 when a car collides.
+                handleVibration.TriggerShortVibration();
+            }
+            else if (collision.gameObject.CompareTag("PoliceBike"))
+            {
+                playerHealth -= 3f; // Reduce health by 3 when a bike collides.
+                handleVibration.TriggerShortVibration();
+            }
+            else if (collision.gameObject.CompareTag("Baricet"))
+            {
+                playerHealth -= 5f; // Reduce health by 7 when a barrier collides.
+                handleVibration.TriggerShortVibration();
+            }
+
+            lastCollisionTime = Time.time; // Update the last collision time.
         }
 
-        lastCollisionTime = Time.time; // Update the last collision time.
-        
-        
     }
 
     private void Update()
@@ -57,6 +62,8 @@ public class PlayerCarCollision : MonoBehaviour
                 handleVibration.TriggerLongVibration();
             }
 
+            canMove= false;
+            isGameOver=true;
             gameOverUI.ShowGameOverUI();
         }
     }

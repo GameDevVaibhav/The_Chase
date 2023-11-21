@@ -15,7 +15,10 @@ public class ScoreManager : MonoBehaviour
     private int incrementThreshold = 200;
     private int incrementThresholdMultiplier = 1;
     private float timeSinceLastUpdate = 0;
-    private float updateInterval = 1.0f; // Interval to increase the score (e.g., 1 point per second).
+    private float updateInterval = 1.0f;
+
+
+    private PlayerCarCollision playerCarCollision;
 
     // Define a delegate and event for the heat level change.
     public delegate void HeatLevelChanged(int newHeatLevel);
@@ -26,13 +29,20 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = score.ToString();
         heatText.text = heatLevel.ToString();
         cashText.text = cashCount.ToString();
+
+        playerCarCollision = FindObjectOfType<PlayerCarCollision>();
     }
 
     private void Update()
     {
+        if (playerCarCollision != null && playerCarCollision.isGameOver)
+        {
+            // If the game is over, stop updating the score.
+            return;
+        }
         timeSinceLastUpdate += Time.deltaTime;
 
-        if (timeSinceLastUpdate >= updateInterval)
+        if ( timeSinceLastUpdate >= updateInterval)
         {
             IncreaseScore(1); // Increase score by 1 point every updateInterval seconds.
             timeSinceLastUpdate = 0;
@@ -46,7 +56,7 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = score.ToString();
 
         // Check and update the heat level
-        if (score >= currentThreshold)
+        if (score >= currentThreshold )
         {
             heatLevel++;
             heatText.text = heatLevel.ToString();
@@ -76,8 +86,12 @@ public class ScoreManager : MonoBehaviour
 
     public void IncreaseBountyOnDestroy(int bountyAmount)
     {
-        IncreaseScore(bountyAmount);
+        if (!playerCarCollision.isGameOver)
+        {
+            IncreaseScore(bountyAmount);
+        }
+        
         // Increase the score when a police vehicle is destroyed.
-        // You can add additional logic here if needed.
+        
     }
 }

@@ -19,12 +19,16 @@ public class PlayerCarController : MonoBehaviour
     Rigidbody2D myRigidBody;
     ScoreManager scoreManager;
 
+    private PlayerCarCollision playerCarCollision;
+
     // Start is called before the first frame update
     void Start()
     {
         myRigidBody = GetComponent < Rigidbody2D>();
         originalMoveSpeed = moveSpeed;
         scoreManager=FindObjectOfType<ScoreManager>();
+
+        playerCarCollision = GetComponent<PlayerCarCollision>();
     }
 
     void Update()
@@ -47,8 +51,14 @@ public class PlayerCarController : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, steer * Time.fixedDeltaTime);
 
         // Move the player perpendicular to the target
-        myRigidBody.velocity = transform.up * moveSpeed * Time.fixedDeltaTime * 10f;
-        //myRigidBody.angularVelocity = -input * steer * 10f;
+        if (playerCarCollision.canMove)
+        {
+            myRigidBody.velocity = transform.up * moveSpeed * Time.fixedDeltaTime * 10f;
+        }
+        else
+        {
+            myRigidBody.velocity = Vector2.zero;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
