@@ -31,6 +31,8 @@ public class MainMenu : MonoBehaviour
 
         colorButton.onClick.AddListener(ToggleColorSelectPanel);
 
+        selectedColor = "#FFD966";
+
         button1.onClick.AddListener(() => ChangeCameraColor("#FFD966"));
         button2.onClick.AddListener(() => ChangeCameraColor("#FF8F8F"));
         button3.onClick.AddListener(() => ChangeCameraColor("#A8DF8E"));
