@@ -7,19 +7,21 @@ public class ObstacleCollision : MonoBehaviour
     public GameObject impactPrefab;
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        HandleVibration handleVibration = FindObjectOfType<HandleVibration>();
         if (collision.gameObject.CompareTag("SwatCar"))
         {
-            HandleVibration handleVibration = GetComponent<HandleVibration>();
+           
             if (handleVibration != null)
             {
                 handleVibration.TriggerShortVibration();
+                Debug.Log("Swat car vibrate");
             }
             Destroy(gameObject);
             InstantiateImpactPrefab(collision.contacts[0].point);
         }
         if (collision.gameObject.CompareTag("PlayerCar"))
         {
-            HandleVibration handleVibration = GetComponent<HandleVibration>();
+            
             if (handleVibration != null)
             {
                 handleVibration.TriggerShortVibration();

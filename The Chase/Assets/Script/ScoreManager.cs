@@ -30,6 +30,10 @@ public class ScoreManager : MonoBehaviour
         heatText.text = heatLevel.ToString();
         cashText.text = cashCount.ToString();
 
+        // Load the cash count from PlayerPrefs or default to 0.
+        cashCount = PlayerPrefs.GetInt("CashCount", 0);
+        cashText.text = cashCount.ToString();
+
         playerCarCollision = FindObjectOfType<PlayerCarCollision>();
     }
 
@@ -74,6 +78,10 @@ public class ScoreManager : MonoBehaviour
     {
         cashCount += amount;
         cashText.text = cashCount.ToString();
+
+        // Save the updated cash count to PlayerPrefs.
+        PlayerPrefs.SetInt("CashCount", cashCount);
+        PlayerPrefs.Save();
     }
 
     private void UpdateHeatThreshold()
