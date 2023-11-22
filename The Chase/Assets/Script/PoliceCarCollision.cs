@@ -17,6 +17,7 @@ public class PoliceCarCollision : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        HandleVibration handleVibration = FindObjectOfType<HandleVibration>();
 
         bool bikeCollision = collision.gameObject.CompareTag("PoliceBike");
         bool carCollision = collision.gameObject.CompareTag("PoliceCar");
@@ -27,7 +28,7 @@ public class PoliceCarCollision : MonoBehaviour
 
         if (swatCollision || baricetCollision || playerCollision || carCollision)
         {
-            HandleVibration handleVibration = GetComponent<HandleVibration>();
+           
             if (handleVibration != null)
             {
                 handleVibration.TriggerLongVibration();
@@ -50,7 +51,7 @@ public class PoliceCarCollision : MonoBehaviour
                 Destroy(gameObject);
                 
                 InstantiateImpactPrefab(collision.contacts[0].point);
-                HandleVibration handleVibration = GetComponent<HandleVibration>();
+                
                 if (handleVibration != null)
                 {
                     handleVibration.TriggerShortVibration();

@@ -492,7 +492,7 @@ MonoBehaviour:
   cashPickupPrefab: {fileID: 1379128862910228074, guid: 74254258efacc304686e1a42fea66400, type: 3}
   playerCarTransform: {fileID: 544175396}
   yOffset: 0
-  speedSpawnInterval: 8
+  speedSpawnInterval: 3
   cashSpawnInterval: 3
   speedBoostSpawnPoints:
   - {fileID: 991962568}
@@ -562,8 +562,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 44d6ac5d24159a342a490daa17714a3f, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1354,7 +1354,7 @@ SpriteRenderer:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 545e26b862b32054fac8006b2bf98926, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5529412}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1403,7 +1403,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 0.8509804, b: 0.4, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1499,7 +1499,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 2
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1625,6 +1625,7 @@ Transform:
   - {fileID: 754943867}
   - {fileID: 1488895440}
   - {fileID: 28055596}
+  - {fileID: 1636642641}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &544175397
@@ -1670,6 +1671,9 @@ MonoBehaviour:
   steer: 25
   speedBoostDuration: 3
   target: {fileID: 1077996186}
+  audioSource: {fileID: 173607063}
+  impactPrefab: {fileID: 4794043405585894037, guid: 912ed638965180844b814827654d19ec, type: 3}
+  impactPrefabPoint: {fileID: 1636642640}
 --- !u!61 &544175399
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1775,7 +1779,7 @@ TrailRenderer:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_Time: 0.8
-  m_PreviewTimeScale: 1
+  m_PreviewTimeScale: 0
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.2
@@ -3584,6 +3588,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 28055596}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1636642640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1636642641}
+  m_Layer: 0
+  m_Name: impactpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1636642641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636642640}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 544175396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1682125105
 GameObject:

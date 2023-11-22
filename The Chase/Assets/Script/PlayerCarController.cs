@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerCarController : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class PlayerCarController : MonoBehaviour
 
     Rigidbody2D myRigidBody;
     ScoreManager scoreManager;
+    public AudioSource audioSource;
+
+    public GameObject impactPrefab;
+    public GameObject impactPrefabPoint;
 
     private PlayerCarCollision playerCarCollision;
 
@@ -66,7 +71,12 @@ public class PlayerCarController : MonoBehaviour
         if (other.CompareTag("SpeedBooster"))
         {
             ApplySpeedBoost();
-            Destroy(other.gameObject); 
+            InstantiateImpactPrefab(impactPrefabPoint.transform.position);
+            Destroy(other.gameObject);
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
         }
         if (other.CompareTag("Cash"))
         {
@@ -95,4 +105,12 @@ public class PlayerCarController : MonoBehaviour
         isSpeedBoosted = false;
     }
 
+    private void InstantiateImpactPrefab(Vector2 position)
+    {
+        // Instantiate the impact prefab at the specified position.
+        if (impactPrefab != null)
+        {
+            Instantiate(impactPrefab, position, Quaternion.identity);
+        }
+    }
 }
