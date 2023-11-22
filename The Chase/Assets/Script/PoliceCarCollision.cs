@@ -18,7 +18,7 @@ public class PoliceCarCollision : MonoBehaviour
     {
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
         HandleVibration handleVibration = FindObjectOfType<HandleVibration>();
-
+        CarDestroyCounter carDestroyCounter = FindObjectOfType<CarDestroyCounter>();
         bool bikeCollision = collision.gameObject.CompareTag("PoliceBike");
         bool carCollision = collision.gameObject.CompareTag("PoliceCar");
         bool swatCollision = collision.gameObject.CompareTag("SwatCar");
@@ -35,7 +35,7 @@ public class PoliceCarCollision : MonoBehaviour
                 Debug.Log("Vibrate long");
             }
             Destroy(gameObject);
-            
+            carDestroyCounter.ObjectDestroyed();
             InstantiateImpactPrefab(collision.contacts[0].point);
             scoreManager.IncreaseBountyOnDestroy(50);
             

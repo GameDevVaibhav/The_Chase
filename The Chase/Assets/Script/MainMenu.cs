@@ -9,7 +9,9 @@ public class MainMenu : MonoBehaviour
 {
     public Button playButton;
     public Button colorButton;
+    public Button challengeButton;
     public GameObject colorSelectPanel;
+    public GameObject challengePanel;
     public Button button1;
     public Button button2;
     public Button button3;
@@ -18,6 +20,7 @@ public class MainMenu : MonoBehaviour
     public string selectedColor;
 
     private bool colorPanelActive = false;
+    private bool challengePanelActive = false;  
 
     private Camera mainCamera; // Reference to the main camera.
 
@@ -30,6 +33,7 @@ public class MainMenu : MonoBehaviour
         playButton.onClick.AddListener(PlayGame);
 
         colorButton.onClick.AddListener(ToggleColorSelectPanel);
+        challengeButton.onClick.AddListener(ToggleChallengePanel);
 
         selectedColor = "#FFD966";
 
@@ -53,6 +57,12 @@ public class MainMenu : MonoBehaviour
     {
         colorPanelActive = !colorPanelActive;
         colorSelectPanel.SetActive(colorPanelActive);
+    }
+
+    private void ToggleChallengePanel()
+    {
+        challengePanelActive = !challengePanelActive;
+        challengePanel.SetActive(challengePanelActive);
     }
 
     private void ChangeCameraColor(string hexColor)
