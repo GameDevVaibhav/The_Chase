@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,6 +16,8 @@ public class MainMenu : MonoBehaviour
     public Button button2;
     public Button button3;
     public Button button4;
+
+    public TextMeshProUGUI cash;
 
     public string selectedColor;
 
@@ -41,8 +43,14 @@ public class MainMenu : MonoBehaviour
         button2.onClick.AddListener(() => ChangeCameraColor("#FF8F8F"));
         button3.onClick.AddListener(() => ChangeCameraColor("#A8DF8E"));
         button4.onClick.AddListener(() => ChangeCameraColor("#00FFF0"));
+
+        
     }
 
+    private void Update()
+    {
+        cash.text = PlayerPrefs.GetInt("CashCount", 0).ToString();
+    }
     private void PlayGame()
     {
         // Load the gameplay scene when the Play button is clicked.
