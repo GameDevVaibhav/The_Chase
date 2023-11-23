@@ -16,10 +16,12 @@ public class PickupSpawner : MonoBehaviour
     private float timeSinceLastCashSpawn = 0;
 
     private Camera mainCamera;
+    private PlayerCarCollision playerCarCollision;
 
     private void Start()
     {
         mainCamera = Camera.main;
+        playerCarCollision = FindObjectOfType<PlayerCarCollision>();
     }
 
     private void Update()
@@ -47,6 +49,10 @@ public class PickupSpawner : MonoBehaviour
             Debug.LogWarning("No speed boost spawn points assigned to the PickupSpawner.");
             return;
         }
+        if (playerCarCollision.isGameOver)
+        {
+            return;
+        }
 
         // Select a random spawn point from the array.
         int randomIndex = Random.Range(0, speedBoostSpawnPoints.Length);
@@ -67,6 +73,10 @@ public class PickupSpawner : MonoBehaviour
         if (cashSpawnPoints.Length == 0)
         {
             Debug.LogWarning("No cash pickup spawn points assigned to the PickupSpawner.");
+            return;
+        }
+        if (playerCarCollision.isGameOver)
+        {
             return;
         }
 

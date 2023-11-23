@@ -12,10 +12,12 @@ public class ObstacleSpawner : MonoBehaviour
 
     private Camera mainCamera;
     private float timeSinceLastSpawn = 0;
+    private PlayerCarCollision playerCarCollision;
 
     private void Start()
     {
         mainCamera = Camera.main;
+        playerCarCollision = FindObjectOfType<PlayerCarCollision>();
     }
 
     private void Update()
@@ -36,6 +38,10 @@ public class ObstacleSpawner : MonoBehaviour
         if (obstacleSpawnPoints.Length == 0)
         {
            
+            return;
+        }
+        if (playerCarCollision.isGameOver)
+        {
             return;
         }
 

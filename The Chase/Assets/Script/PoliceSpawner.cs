@@ -11,12 +11,19 @@ public class PoliceSpawner : MonoBehaviour
 
     private float timeSinceLastSpawn = 0;
 
+    private PlayerCarCollision playerCarCollision;
+
+    private void Start()
+    {
+        playerCarCollision = FindObjectOfType<PlayerCarCollision>();
+    }
     private void Update()
     {
         timeSinceLastSpawn += Time.deltaTime;
 
         if (timeSinceLastSpawn >= spawnInterval)
         {
+
             SpawnCar();
             timeSinceLastSpawn = 0;
         }
@@ -27,6 +34,10 @@ public class PoliceSpawner : MonoBehaviour
         if (spawnPoints.Length == 0)
         {
             Debug.LogWarning("No spawn points assigned to the PoliceSpawner.");
+            return;
+        }
+        if (playerCarCollision.isGameOver)
+        {
             return;
         }
 
