@@ -16,6 +16,7 @@ public class PoliceBikeCollision : MonoBehaviour
 
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
         HandleVibration handleVibration = FindObjectOfType<HandleVibration>();
+        CarDestroyCounter bikeDestroyCounter = FindObjectOfType<CarDestroyCounter>();
         if (bikeCollision)
         {
 
@@ -23,10 +24,11 @@ public class PoliceBikeCollision : MonoBehaviour
             if (handleVibration != null)
             {
                 handleVibration.TriggerShortVibration();
-                Debug.Log("Bike Bike");
+                //Debug.Log("Bike Bike");
             }
             
             Destroy(gameObject);
+            bikeDestroyCounter.BikeDestroyed();
             InstantiateImpactPrefab(collision.contacts[0].point);
 
             if (scoreManager != null)
@@ -42,6 +44,7 @@ public class PoliceBikeCollision : MonoBehaviour
                 handleVibration.TriggerShortVibration();
             }
             Destroy(gameObject);
+            bikeDestroyCounter.BikeDestroyed();
             scoreManager.IncreaseBountyOnDestroy(10);
             InstantiateImpactPrefab(collision.contacts[0].point);
         }

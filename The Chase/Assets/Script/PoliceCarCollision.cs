@@ -32,10 +32,10 @@ public class PoliceCarCollision : MonoBehaviour
             if (handleVibration != null)
             {
                 handleVibration.TriggerLongVibration();
-                Debug.Log("Vibrate long");
+                //Debug.Log("Vibrate long");
             }
             Destroy(gameObject);
-            carDestroyCounter.ObjectDestroyed();
+            carDestroyCounter.CarDestroyed();
             InstantiateImpactPrefab(collision.contacts[0].point);
             scoreManager.IncreaseBountyOnDestroy(50);
             
@@ -49,7 +49,7 @@ public class PoliceCarCollision : MonoBehaviour
             if (collisionCount >= 3)
             {
                 Destroy(gameObject);
-                
+                carDestroyCounter.CarDestroyed();
                 InstantiateImpactPrefab(collision.contacts[0].point);
                 
                 if (handleVibration != null)

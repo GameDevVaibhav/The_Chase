@@ -9,7 +9,7 @@ public class HandleVibration : MonoBehaviour
         if (hapticFeedbackEnabled /*&& SystemInfo.supportsVibration*/)
         {
             Handheld.Vibrate();
-            Debug.Log("Short Vibrations");
+           
         }
     }
 
@@ -19,7 +19,7 @@ public class HandleVibration : MonoBehaviour
         {
             // Adjust the duration as needed.
             VibrateForDuration(500);
-            Debug.Log("Long Vibrations");
+            
         }
     }
 

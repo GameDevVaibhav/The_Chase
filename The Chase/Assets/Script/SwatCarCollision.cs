@@ -8,6 +8,7 @@ public class SwatCarCollision : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         HandleVibration handleVibration = FindObjectOfType<HandleVibration>();
+        CarDestroyCounter carDestroyCounter = FindObjectOfType<CarDestroyCounter>();
         if (collision.gameObject.CompareTag("Baricet"))
         {
            
@@ -16,6 +17,7 @@ public class SwatCarCollision : MonoBehaviour
                 handleVibration.TriggerShortVibration();
             }
             Destroy(gameObject);
+            carDestroyCounter.SwatDestroyed();
             InstantiateImpactPrefab(collision.contacts[0].point);
             ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
             if (scoreManager != null)

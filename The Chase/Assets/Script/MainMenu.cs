@@ -49,7 +49,7 @@ public class MainMenu : MonoBehaviour
         
         PlayerPrefs.SetString("selectedColor", selectedColor);
         PlayerPrefs.Save();
-        Debug.Log(selectedColor);
+       // Debug.Log(selectedColor);
         SceneManager.LoadScene("Chase"); // Replace "GameplayScene" with the actual name of your gameplay scene.
     }
 
@@ -75,7 +75,7 @@ public class MainMenu : MonoBehaviour
         {
             mainCamera.backgroundColor = newColor;
             
-            Debug.Log(selectedColor);
+           // Debug.Log(selectedColor);
         }
         else
         {
