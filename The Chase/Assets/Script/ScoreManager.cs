@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class ScoreManager : MonoBehaviour
 {
-    public Text scoreText; // Reference to a Text component to display the score.
-    public Text heatText; // Reference to a Text component to display the heat level.
-    public Text cashText;
+    public TextMeshProUGUI scoreText; // Reference to a Text component to display the score.
+    public TextMeshProUGUI heatText; // Reference to a Text component to display the heat level.
+    public TextMeshProUGUI cashText;
     public int score = 0;
     private int heatLevel = 1;
     public int cashCount = 0;

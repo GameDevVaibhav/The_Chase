@@ -11,6 +11,10 @@ public class ChallengeManager : MonoBehaviour
     private int carDestroyed = 5;
     private int swatDestroyed = 5;
 
+    private int challenge1Threshold=5;
+    private int challenge2Threshold=2;
+    private int challenge3Threshold=2;
+
     public TextMeshProUGUI challenge1Text;
     public TextMeshProUGUI challenge2Text;
     public TextMeshProUGUI challenge3Text;
@@ -26,6 +30,8 @@ public class ChallengeManager : MonoBehaviour
     private bool claimed1;
     private bool claimed2;
     private bool claimed3;
+
+    public AudioSource audioSource;
 
     void Start()
     {
@@ -54,7 +60,7 @@ public class ChallengeManager : MonoBehaviour
     private void Challenge1(int destroyed)
     {
         challenge1Text.text = bikeDestroyed.ToString() + "/5";
-        if (destroyed >= 5)
+        if (destroyed >= challenge1Threshold)
         {
             Debug.Log("Challenge 1 completed");
             challenge1Text.text = "Completed";
@@ -64,7 +70,7 @@ public class ChallengeManager : MonoBehaviour
     private void Challenge2(int destroyed)
     {
         challenge2Text.text = carDestroyed.ToString() + "/2";
-        if (destroyed >= 2)
+        if (destroyed >= challenge2Threshold)
         {
             Debug.Log("Challenge 2 completed");
             challenge2Text.text = "Completed";
@@ -74,7 +80,7 @@ public class ChallengeManager : MonoBehaviour
     private void Challenge3(int destroyed)
     {
         challenge3Text.text = swatDestroyed.ToString() + "/2";
-        if (destroyed >= 2)
+        if (destroyed >= challenge3Threshold)
         {
             Debug.Log("Challenge 3 completed");
             challenge3Text.text = "Completed";
@@ -84,9 +90,9 @@ public class ChallengeManager : MonoBehaviour
     private void ActivateButtons()
     {
         // Set buttons active or inactive based on challenge completion and claimed status
-        button1.SetActive(bikeDestroyed >= 5 && !claimed1);
-        button2.SetActive(carDestroyed >= 2 && !claimed2);
-        button3.SetActive(swatDestroyed >= 2 && !claimed3);
+        button1.SetActive(bikeDestroyed >= challenge1Threshold && !claimed1);
+        button2.SetActive(carDestroyed >= challenge2Threshold && !claimed2);
+        button3.SetActive(swatDestroyed >= challenge3Threshold && !claimed3);
     }
 
     private void ClaimReward(int rewardAmount, GameObject button, ref bool claimed, string playerPrefsKey)
@@ -100,7 +106,10 @@ public class ChallengeManager : MonoBehaviour
 
             button.SetActive(false);
             claimed = true;
-
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
             // Save claimed status
             PlayerPrefs.SetInt(playerPrefsKey, 1);
             PlayerPrefs.Save();

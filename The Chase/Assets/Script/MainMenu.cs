@@ -65,12 +65,20 @@ public class MainMenu : MonoBehaviour
     {
         colorPanelActive = !colorPanelActive;
         colorSelectPanel.SetActive(colorPanelActive);
+
+        // Deactivate the other panel
+        challengePanel.SetActive(false);
+        challengePanelActive = false;
     }
 
     private void ToggleChallengePanel()
     {
         challengePanelActive = !challengePanelActive;
         challengePanel.SetActive(challengePanelActive);
+
+        colorSelectPanel.SetActive(false);
+        colorPanelActive = false;
+
     }
 
     private void ChangeCameraColor(string hexColor)

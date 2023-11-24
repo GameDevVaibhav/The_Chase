@@ -20,6 +20,7 @@ public class PlayerCarController : MonoBehaviour
     Rigidbody2D myRigidBody;
     ScoreManager scoreManager;
     public AudioSource audioSource;
+    public AudioSource audioCash;
 
     public GameObject impactPrefab;
     public GameObject impactPrefabPoint;
@@ -82,6 +83,10 @@ public class PlayerCarController : MonoBehaviour
         {
             scoreManager.IncreaseCash(10);
             Destroy(other.gameObject);
+            if (audioCash != null)
+            {
+                audioCash.Play();
+            }
         }
     }
 
