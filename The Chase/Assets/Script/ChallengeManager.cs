@@ -7,112 +7,138 @@ using UnityEngine.UI;
 
 public class ChallengeManager : MonoBehaviour
 {
-    private int bikeDestroyed = 5;
-    private int carDestroyed = 5;
-    private int swatDestroyed = 5;
+    [System.Serializable]
+    public class Challenge
+    {
+        public string challengeName;
+        public int threshold;
+        public int currentProgress;
+        public Button claimButton;
+        public Slider progressSlider;
+        public GameObject challenge;
+        public int reward;
+        public bool isRewardClaimed=false;
+    }
 
-    private int challenge1Threshold=5;
-    private int challenge2Threshold=2;
-    private int challenge3Threshold=2;
+    public List<Challenge> bikeChallenges;
+    public List<Challenge> carChallenges;
+    public List<Challenge> swatChallenges;
 
-    public TextMeshProUGUI challenge1Text;
-    public TextMeshProUGUI challenge2Text;
-    public TextMeshProUGUI challenge3Text;
+    private int bikeDestroyed;
+    private int carDestroyed;
+    private int swatDestroyed;
 
-    public Button claim1;
-    public Button claim2;
-    public Button claim3;
+    int cashCount;
 
-    public GameObject button1;
-    public GameObject button2;
-    public GameObject button3;
-
-    private bool claimed1;
-    private bool claimed2;
-    private bool claimed3;
-
-    public AudioSource audioSource;
-
-    void Start()
+    private void Start()
     {
         bikeDestroyed = PlayerPrefs.GetInt("BikeDestroyedCount", 0);
         carDestroyed = PlayerPrefs.GetInt("CarDestroyedCount", 0);
         swatDestroyed = PlayerPrefs.GetInt("SwatDestroyedCount", 0);
 
-        // Load claimed status from PlayerPrefs
-        claimed1 = PlayerPrefs.GetInt("Claimed1", 0) == 1;
-        claimed2 = PlayerPrefs.GetInt("Claimed2", 0) == 1;
-        claimed3 = PlayerPrefs.GetInt("Claimed3", 0) == 1;
+        // Call the BikeChallenge method to check the bike challenges
+        
 
-        Challenge1(bikeDestroyed);
-        Challenge2(carDestroyed);
-        Challenge3(swatDestroyed);
-
-        // Activate buttons based on challenge completion and claimed status
-        ActivateButtons();
-
-        // Subscribe button click events
-        claim1.onClick.AddListener(() => ClaimReward(50, button1, ref claimed1, "Claimed1"));
-        claim2.onClick.AddListener(() => ClaimReward(100, button2, ref claimed2, "Claimed2"));
-        claim3.onClick.AddListener(() => ClaimReward(150, button3, ref claimed3, "Claimed3"));
-    }
-
-    private void Challenge1(int destroyed)
-    {
-        challenge1Text.text = bikeDestroyed.ToString() + "/5";
-        if (destroyed >= challenge1Threshold)
+        foreach (var challenge in bikeChallenges)
         {
-            Debug.Log("Challenge 1 completed");
-            challenge1Text.text = "Completed";
+            challenge.isRewardClaimed = PlayerPrefs.GetInt(challenge.challengeName + "_isRewardClaimed", 0) == 1;
+            Debug.Log("bikeC is claimed  " + challenge.isRewardClaimed);
         }
-    }
-
-    private void Challenge2(int destroyed)
-    {
-        challenge2Text.text = carDestroyed.ToString() + "/2";
-        if (destroyed >= challenge2Threshold)
+        foreach (var challenge in carChallenges)
         {
-            Debug.Log("Challenge 2 completed");
-            challenge2Text.text = "Completed";
+            challenge.isRewardClaimed = PlayerPrefs.GetInt(challenge.challengeName + "_isRewardClaimed", 0) == 1;
         }
-    }
-
-    private void Challenge3(int destroyed)
-    {
-        challenge3Text.text = swatDestroyed.ToString() + "/2";
-        if (destroyed >= challenge3Threshold)
+        foreach (var challenge in swatChallenges)
         {
-            Debug.Log("Challenge 3 completed");
-            challenge3Text.text = "Completed";
+            challenge.isRewardClaimed = PlayerPrefs.GetInt(challenge.challengeName + "_isRewardClaimed", 0) == 1;
         }
+        BikeChallenge(bikeChallenges);
+        CarChallenge(carChallenges);
+        SwatChallenge(swatChallenges);
+
     }
 
-    private void ActivateButtons()
+    private void BikeChallenge(List<Challenge> challenges)
     {
-        // Set buttons active or inactive based on challenge completion and claimed status
-        button1.SetActive(bikeDestroyed >= challenge1Threshold && !claimed1);
-        button2.SetActive(carDestroyed >= challenge2Threshold && !claimed2);
-        button3.SetActive(swatDestroyed >= challenge3Threshold && !claimed3);
-    }
-
-    private void ClaimReward(int rewardAmount, GameObject button, ref bool claimed, string playerPrefsKey)
-    {
-        if (!claimed)
+        foreach (var challenge in challenges)
         {
-            int cash = PlayerPrefs.GetInt("CashCount", 0);
-            cash += rewardAmount;
-            PlayerPrefs.SetInt("CashCount", cash);
-            PlayerPrefs.Save();
-
-            button.SetActive(false);
-            claimed = true;
-            if (audioSource != null)
+            Debug.Log(challenge.challengeName + ":" + bikeDestroyed);
+            float value;
+            value = (float)bikeDestroyed / (float)challenge.threshold;
+            challenge.progressSlider.value = value;
+            if (bikeDestroyed >= challenge.threshold)
             {
-                audioSource.Play();
+                if (challenge.isRewardClaimed)
+                {
+                    challenge.challenge.SetActive(false);
+                    
+                }
+                challenge.claimButton.gameObject.SetActive(true);
+                Debug.Log(challenge.challengeName + " challenge is completed");
+                challenge.claimButton.onClick.AddListener(() => ClaimButtonClicked(challenge));
             }
-            // Save claimed status
-            PlayerPrefs.SetInt(playerPrefsKey, 1);
-            PlayerPrefs.Save();
+            
         }
+    }
+    private void CarChallenge(List<Challenge> challenges)
+    {
+        foreach (var challenge in challenges)
+        {
+            Debug.Log(challenge.challengeName + ":" + carDestroyed);
+            float value;
+            value = (float)carDestroyed / (float)challenge.threshold;
+            challenge.progressSlider.value = value;
+            if (carDestroyed >= challenge.threshold)
+            {
+                if (challenge.isRewardClaimed)
+                {
+                    challenge.challenge.SetActive(false);
+                }
+                challenge.claimButton.gameObject.SetActive(true);
+                Debug.Log(challenge.challengeName + " challenge is completed");
+                challenge.claimButton.onClick.AddListener(() => ClaimButtonClicked(challenge));
+            }
+            
+        }
+    }
+    private void SwatChallenge(List<Challenge> challenges)
+    {
+        foreach (var challenge in challenges)
+        {
+            Debug.Log(challenge.challengeName + ":" + swatDestroyed);
+            float value;
+            value = (float)swatDestroyed / (float)challenge.threshold;
+            challenge.progressSlider.value = value;
+            Debug.Log(challenge.threshold);
+            Debug.Log(challenge.progressSlider.value);
+            if (swatDestroyed >= challenge.threshold)
+            {
+                if (challenge.isRewardClaimed)
+                {
+                    challenge.challenge.SetActive(false);
+                }
+                challenge.claimButton.gameObject.SetActive(true);
+                Debug.Log(challenge.challengeName + " challenge is completed");
+                challenge.claimButton.onClick.AddListener(() => ClaimButtonClicked(challenge));
+            }
+           
+        }
+    }
+
+    private void ClaimButtonClicked(Challenge challenge)
+    {
+        int cashCount = PlayerPrefs.GetInt("CashCount", 0);
+        cashCount = cashCount + challenge.reward;
+        PlayerPrefs.SetInt("CashCount", cashCount);
+        PlayerPrefs.Save();
+
+        challenge.isRewardClaimed= true;
+        Debug.Log("claim" + challenge.reward);
+
+        PlayerPrefs.SetInt(challenge.challengeName + "_isRewardClaimed", 1);
+        PlayerPrefs.Save();
+
+        // Destroy the challenge object
+        challenge.challenge.SetActive(false);
     }
 }  
