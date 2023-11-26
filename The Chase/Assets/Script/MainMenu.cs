@@ -19,38 +19,19 @@ public class MainMenu : MonoBehaviour
     public Button button3;
     public Button button4;
 
-    public Button redCar;
-    public Button orangeCar;
-    public Button blueCar;
-    public Button purpleCar;
-    public Button greenCar;
-    public Button pinkCar;
-    public Button blackCar;
+    public Button[] carButtons; // Array for car selection buttons
 
     public SpriteRenderer carSpriteRenderer;
 
-    [SerializeField]
-    private Sprite redCarSprite;
-    [SerializeField]
-    private Sprite orangeCarSprite;
-    [SerializeField]
-    private Sprite blueCarSprite;
-    [SerializeField]
-    private Sprite purpleCarSprite;
-    [SerializeField]
-    private Sprite greenCarSprite;
-    [SerializeField]
-    private Sprite pinkCarSprite;
-    [SerializeField]
-    private Sprite blackCarSprite;
-
+    public List<Sprite> carSprites;
+    private int selectedCarIndex = 0;
 
     public TextMeshProUGUI cash;
 
     public string selectedColor;
 
     private bool colorPanelActive = false;
-    private bool challengePanelActive = false; 
+    private bool challengePanelActive = false;
     private bool carSelectPanelActive = false;
 
     private Camera mainCamera; // Reference to the main camera.
@@ -60,9 +41,8 @@ public class MainMenu : MonoBehaviour
         // Find the main camera during runtime.
         mainCamera = Camera.main;
 
-        string sprite = PlayerPrefs.GetString("SelectedCarSprite", "RedCar");
-        carUpdate(sprite);
-
+        selectedCarIndex = PlayerPrefs.GetInt("SelectedCarIndex", 0);
+        carUpdate(selectedCarIndex);
 
         // Hook up the button click events to the corresponding methods.
         playButton.onClick.AddListener(PlayGame);
@@ -78,29 +58,22 @@ public class MainMenu : MonoBehaviour
         button3.onClick.AddListener(() => ChangeCameraColor("#A8DF8E"));
         button4.onClick.AddListener(() => ChangeCameraColor("#00FFF0"));
 
-        redCar.onClick.AddListener(() => ChangeCar(redCarSprite));
-        orangeCar.onClick.AddListener(() => ChangeCar(orangeCarSprite));
-        blueCar.onClick.AddListener(() => ChangeCar(blueCarSprite));
-        purpleCar.onClick.AddListener(() => ChangeCar(purpleCarSprite));
-        greenCar.onClick.AddListener(() => ChangeCar(greenCarSprite));
-        pinkCar.onClick.AddListener(() => ChangeCar(pinkCarSprite));
-        blackCar.onClick.AddListener(() => ChangeCar(blackCarSprite));
-
-
+        // Assign click listeners for each car button in the array
+        for (int i = 0; i < carButtons.Length; i++)
+        {
+            int index = i; // Capture the current value of i for the lambda function
+            carButtons[i].onClick.AddListener(() => ChangeCar(index));
+        }
     }
 
     private void Update()
     {
         cash.text = PlayerPrefs.GetInt("CashCount", 0).ToString();
     }
+
     private void PlayGame()
     {
-        // Load the gameplay scene when the Play button is clicked.
-        
-        PlayerPrefs.SetString("selectedColor", selectedColor);
-        PlayerPrefs.Save();
-       // Debug.Log(selectedColor);
-        SceneManager.LoadScene("Chase"); // Replace "GameplayScene" with the actual name of your gameplay scene.
+        SceneManager.LoadScene("Chase");
     }
 
     private void ToggleColorSelectPanel()
@@ -108,11 +81,10 @@ public class MainMenu : MonoBehaviour
         colorPanelActive = !colorPanelActive;
         colorSelectPanel.SetActive(colorPanelActive);
 
-        // Deactivate the other panel
         challengePanel.SetActive(false);
         challengePanelActive = false;
         carSelectPanel.SetActive(false);
-        carSelectPanelActive= false;
+        carSelectPanelActive = false;
     }
 
     private void ToggleChallengePanel()
@@ -124,12 +96,11 @@ public class MainMenu : MonoBehaviour
         colorPanelActive = false;
         carSelectPanel.SetActive(false);
         carSelectPanelActive = false;
-
     }
 
     private void ToggleCarSelectPanel()
     {
-        carSelectPanelActive= !carSelectPanelActive;
+        carSelectPanelActive = !carSelectPanelActive;
         carSelectPanel.SetActive(carSelectPanelActive);
 
         colorSelectPanel.SetActive(false);
@@ -140,15 +111,13 @@ public class MainMenu : MonoBehaviour
 
     private void ChangeCameraColor(string hexColor)
     {
-        selectedColor= hexColor;
+        selectedColor = hexColor;
         Color newColor;
         ColorUtility.TryParseHtmlString(hexColor, out newColor);
-        // Change the background color of the main camera.
+
         if (mainCamera != null)
         {
             mainCamera.backgroundColor = newColor;
-            
-           // Debug.Log(selectedColor);
         }
         else
         {
@@ -156,52 +125,30 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void ChangeCar(Sprite newSprite)
+    private void ChangeCar(int newIndex)
     {
-        if (carSpriteRenderer != null)
+        if (newIndex >= 0 && newIndex < carSprites.Count)
         {
-            carSpriteRenderer.sprite = newSprite;
-
-            // Save the selected sprite name to PlayerPrefs
-            PlayerPrefs.SetString("SelectedCarSprite", newSprite.name);
+            selectedCarIndex = newIndex;
+            carSpriteRenderer.sprite = carSprites[selectedCarIndex];
+            PlayerPrefs.SetInt("SelectedCarIndex", selectedCarIndex);
             PlayerPrefs.Save();
         }
         else
         {
-            Debug.LogWarning("Car SpriteRenderer not found.");
+            Debug.LogWarning("Invalid car index.");
         }
     }
 
-    private void carUpdate(string selectedCarSpriteName)
+    private void carUpdate(int index)
     {
-        switch (selectedCarSpriteName)
+        if (index >= 0 && index < carSprites.Count)
         {
-            case "RedCar":
-                carSpriteRenderer.sprite = redCarSprite;
-                break;
-            case "OrangeCar":
-                carSpriteRenderer.sprite = orangeCarSprite;
-                break;
-            case "BlueCar":
-                carSpriteRenderer.sprite = blueCarSprite;
-                break;
-            case "PurpleCar":
-                carSpriteRenderer.sprite = purpleCarSprite;
-                break;
-            case "GreenCar":
-                carSpriteRenderer.sprite = greenCarSprite;
-                break;
-            case "PinkCar":
-                carSpriteRenderer.sprite = pinkCarSprite;
-                break;
-            case "BlackCar":
-                carSpriteRenderer.sprite = blackCarSprite;
-                break;
-            default:
-                
-                Debug.LogWarning("Selected car sprite not found. Using default sprite.");
-                
-                break;
+            carSpriteRenderer.sprite = carSprites[index];
+        }
+        else
+        {
+            Debug.LogWarning("Selected car index not found. Using default sprite.");
         }
     }
 }

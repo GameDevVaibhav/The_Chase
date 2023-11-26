@@ -29,42 +29,26 @@ public class PlayerCarController : MonoBehaviour
 
     public SpriteRenderer carSpriteRenderer;
 
-    [SerializeField]
-    private Sprite redCarSprite;
-    [SerializeField]
-    private Sprite orangeCarSprite;
-    [SerializeField]
-    private Sprite blueCarSprite;
-    [SerializeField]
-    private Sprite purpleCarSprite;
-    [SerializeField]
-    private Sprite greenCarSprite;
-    [SerializeField]
-    private Sprite pinkCarSprite;
-    [SerializeField]
-    private Sprite blackCarSprite;
+    public List<Sprite> carSprites = new List<Sprite>();
 
     // Start is called before the first frame update
     void Start()
     {
-        myRigidBody = GetComponent < Rigidbody2D>();
+        myRigidBody = GetComponent<Rigidbody2D>();
         originalMoveSpeed = moveSpeed;
-        scoreManager=FindObjectOfType<ScoreManager>();
+        scoreManager = FindObjectOfType<ScoreManager>();
 
         playerCarCollision = GetComponent<PlayerCarCollision>();
 
-        // Retrieve the selected car sprite name from PlayerPrefs
-        string selectedCarSpriteName = PlayerPrefs.GetString("SelectedCarSprite", "Player");
+        // Retrieve the selected car index from PlayerPrefs
+        int selectedCarIndex = PlayerPrefs.GetInt("SelectedCarIndex", 0);
 
-        carSelect(selectedCarSpriteName);
-        
-
+        carSelect(selectedCarIndex);
     }
 
     void Update()
     {
-       input = Input.GetAxis("Horizontal");
-        
+        input = Input.GetAxis("Horizontal");
     }
 
     // Update is called once per frame
@@ -143,36 +127,16 @@ public class PlayerCarController : MonoBehaviour
         }
     }
 
-    private void carSelect(string selectedCarSpriteName)
+    private void carSelect(int selectedCarIndex)
     {
-        switch (selectedCarSpriteName)
+        if (selectedCarIndex >= 0 && selectedCarIndex < carSprites.Count)
         {
-            case "RedCar":
-                carSpriteRenderer.sprite = redCarSprite;
-                break;
-            case "OrangeCar":
-                carSpriteRenderer.sprite = orangeCarSprite;
-                break;
-            case "BlueCar":
-                carSpriteRenderer.sprite = blueCarSprite;
-                break;
-            case "PurpleCar":
-                carSpriteRenderer.sprite = purpleCarSprite;
-                break;
-            case "GreenCar":
-                carSpriteRenderer.sprite = greenCarSprite;
-                break;
-            case "PinkCar":
-                carSpriteRenderer.sprite = pinkCarSprite;
-                break;
-            case "BlackCar":
-                carSpriteRenderer.sprite = blackCarSprite;
-                break;
-            default:
-                // Handle the default case or provide a default sprite
-                Debug.LogWarning("Selected car sprite not found. Using default sprite.");
-                // Example: carSpriteRenderer.sprite = defaultSprite;
-                break;
+            carSpriteRenderer.sprite = carSprites[selectedCarIndex];
+        }
+        else
+        {
+            Debug.LogWarning("Selected car index not found. Using default sprite.");
+            // Example: carSpriteRenderer.sprite = defaultSprite;
         }
     }
 }
