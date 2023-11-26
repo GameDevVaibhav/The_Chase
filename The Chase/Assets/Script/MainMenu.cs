@@ -10,19 +10,23 @@ public class MainMenu : MonoBehaviour
     public Button playButton;
     public Button colorButton;
     public Button challengeButton;
+    public Button carSelectButton;
     public GameObject colorSelectPanel;
     public GameObject challengePanel;
+    public GameObject carSelectPanel;
     public Button button1;
     public Button button2;
     public Button button3;
     public Button button4;
+    
 
     public TextMeshProUGUI cash;
 
     public string selectedColor;
 
     private bool colorPanelActive = false;
-    private bool challengePanelActive = false;  
+    private bool challengePanelActive = false; 
+    private bool carSelectPanelActive = false;
 
     private Camera mainCamera; // Reference to the main camera.
 
@@ -36,6 +40,7 @@ public class MainMenu : MonoBehaviour
 
         colorButton.onClick.AddListener(ToggleColorSelectPanel);
         challengeButton.onClick.AddListener(ToggleChallengePanel);
+        carSelectButton.onClick.AddListener(ToggleCarSelectPanel);
 
         selectedColor = "#FFD966";
 
@@ -78,6 +83,14 @@ public class MainMenu : MonoBehaviour
 
         colorSelectPanel.SetActive(false);
         colorPanelActive = false;
+
+    }
+
+    private void ToggleCarSelectPanel()
+    {
+        carSelectPanelActive= !carSelectPanelActive;
+        carSelectPanel.SetActive(carSelectPanelActive);
+
 
     }
 
