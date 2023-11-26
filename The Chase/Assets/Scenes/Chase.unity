@@ -1643,6 +1643,14 @@ MonoBehaviour:
   audioCash: {fileID: 52663981}
   impactPrefab: {fileID: 4794043405585894037, guid: 912ed638965180844b814827654d19ec, type: 3}
   impactPrefabPoint: {fileID: 1636642640}
+  carSpriteRenderer: {fileID: 544175395}
+  redCarSprite: {fileID: 21300000, guid: ce451b4be44db6c49a66a14c77ca8f55, type: 3}
+  orangeCarSprite: {fileID: 21300000, guid: 82723cbc1cb697e4f887c620c192a71c, type: 3}
+  blueCarSprite: {fileID: 21300000, guid: 1ff00af7cbb86414eab4a88e6c519d32, type: 3}
+  purpleCarSprite: {fileID: 21300000, guid: 8ae8fbf84e3a0d14d921e733091e1aa3, type: 3}
+  greenCarSprite: {fileID: 21300000, guid: 3f8967af468f8d041896f9a5e7f6f232, type: 3}
+  pinkCarSprite: {fileID: 21300000, guid: 1377df35df96f5c45a73edaa32acbab2, type: 3}
+  blackCarSprite: {fileID: 21300000, guid: b6ee0ce8c57a7fc44b8a251f26b8fbf4, type: 3}
 --- !u!61 &544175399
 BoxCollider2D:
   m_ObjectHideFlags: 0

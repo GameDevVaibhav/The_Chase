@@ -27,6 +27,23 @@ public class PlayerCarController : MonoBehaviour
 
     private PlayerCarCollision playerCarCollision;
 
+    public SpriteRenderer carSpriteRenderer;
+
+    [SerializeField]
+    private Sprite redCarSprite;
+    [SerializeField]
+    private Sprite orangeCarSprite;
+    [SerializeField]
+    private Sprite blueCarSprite;
+    [SerializeField]
+    private Sprite purpleCarSprite;
+    [SerializeField]
+    private Sprite greenCarSprite;
+    [SerializeField]
+    private Sprite pinkCarSprite;
+    [SerializeField]
+    private Sprite blackCarSprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +52,13 @@ public class PlayerCarController : MonoBehaviour
         scoreManager=FindObjectOfType<ScoreManager>();
 
         playerCarCollision = GetComponent<PlayerCarCollision>();
+
+        // Retrieve the selected car sprite name from PlayerPrefs
+        string selectedCarSpriteName = PlayerPrefs.GetString("SelectedCarSprite", "Player");
+
+        carSelect(selectedCarSpriteName);
+        
+
     }
 
     void Update()
@@ -116,6 +140,39 @@ public class PlayerCarController : MonoBehaviour
         if (impactPrefab != null)
         {
             Instantiate(impactPrefab, position, Quaternion.identity);
+        }
+    }
+
+    private void carSelect(string selectedCarSpriteName)
+    {
+        switch (selectedCarSpriteName)
+        {
+            case "RedCar":
+                carSpriteRenderer.sprite = redCarSprite;
+                break;
+            case "OrangeCar":
+                carSpriteRenderer.sprite = orangeCarSprite;
+                break;
+            case "BlueCar":
+                carSpriteRenderer.sprite = blueCarSprite;
+                break;
+            case "PurpleCar":
+                carSpriteRenderer.sprite = purpleCarSprite;
+                break;
+            case "GreenCar":
+                carSpriteRenderer.sprite = greenCarSprite;
+                break;
+            case "PinkCar":
+                carSpriteRenderer.sprite = pinkCarSprite;
+                break;
+            case "BlackCar":
+                carSpriteRenderer.sprite = blackCarSprite;
+                break;
+            default:
+                // Handle the default case or provide a default sprite
+                Debug.LogWarning("Selected car sprite not found. Using default sprite.");
+                // Example: carSpriteRenderer.sprite = defaultSprite;
+                break;
         }
     }
 }
