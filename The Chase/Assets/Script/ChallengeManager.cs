@@ -28,6 +28,8 @@ public class ChallengeManager : MonoBehaviour
     private int carDestroyed;
     private int swatDestroyed;
 
+   public AudioSource audioSource;
+
     int cashCount;
 
     private void Start()
@@ -127,6 +129,7 @@ public class ChallengeManager : MonoBehaviour
 
     private void ClaimButtonClicked(Challenge challenge)
     {
+        audioSource.Play();
         int cashCount = PlayerPrefs.GetInt("CashCount", 0);
         cashCount = cashCount + challenge.reward;
         PlayerPrefs.SetInt("CashCount", cashCount);
