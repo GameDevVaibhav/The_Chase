@@ -17,9 +17,10 @@ public class FollowCamera : MonoBehaviour
     private void Start()
     {
         selectedColor = PlayerPrefs.GetString("selectedColor");
+        Debug.Log("color"+selectedColor);
 
-        
-        mainCamera=Camera.main;
+
+        mainCamera =Camera.main;
         Color newColor;
         ColorUtility.TryParseHtmlString(selectedColor, out newColor);
         mainCamera.backgroundColor = newColor;

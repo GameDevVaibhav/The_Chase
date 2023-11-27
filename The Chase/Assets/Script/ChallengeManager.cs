@@ -44,7 +44,7 @@ public class ChallengeManager : MonoBehaviour
         foreach (var challenge in bikeChallenges)
         {
             challenge.isRewardClaimed = PlayerPrefs.GetInt(challenge.challengeName + "_isRewardClaimed", 0) == 1;
-            Debug.Log("bikeC is claimed  " + challenge.isRewardClaimed);
+           // Debug.Log("bikeC is claimed  " + challenge.isRewardClaimed);
         }
         foreach (var challenge in carChallenges)
         {
@@ -64,7 +64,7 @@ public class ChallengeManager : MonoBehaviour
     {
         foreach (var challenge in challenges)
         {
-            Debug.Log(challenge.challengeName + ":" + bikeDestroyed);
+            //Debug.Log(challenge.challengeName + ":" + bikeDestroyed);
             float value;
             value = (float)bikeDestroyed / (float)challenge.threshold;
             challenge.progressSlider.value = value;
@@ -76,7 +76,7 @@ public class ChallengeManager : MonoBehaviour
                     
                 }
                 challenge.claimButton.gameObject.SetActive(true);
-                Debug.Log(challenge.challengeName + " challenge is completed");
+               // Debug.Log(challenge.challengeName + " challenge is completed");
                 challenge.claimButton.onClick.AddListener(() => ClaimButtonClicked(challenge));
             }
             
@@ -86,7 +86,7 @@ public class ChallengeManager : MonoBehaviour
     {
         foreach (var challenge in challenges)
         {
-            Debug.Log(challenge.challengeName + ":" + carDestroyed);
+           // Debug.Log(challenge.challengeName + ":" + carDestroyed);
             float value;
             value = (float)carDestroyed / (float)challenge.threshold;
             challenge.progressSlider.value = value;
@@ -97,7 +97,7 @@ public class ChallengeManager : MonoBehaviour
                     challenge.challenge.SetActive(false);
                 }
                 challenge.claimButton.gameObject.SetActive(true);
-                Debug.Log(challenge.challengeName + " challenge is completed");
+                //Debug.Log(challenge.challengeName + " challenge is completed");
                 challenge.claimButton.onClick.AddListener(() => ClaimButtonClicked(challenge));
             }
             
@@ -111,8 +111,8 @@ public class ChallengeManager : MonoBehaviour
             float value;
             value = (float)swatDestroyed / (float)challenge.threshold;
             challenge.progressSlider.value = value;
-            Debug.Log(challenge.threshold);
-            Debug.Log(challenge.progressSlider.value);
+           // Debug.Log(challenge.threshold);
+           // Debug.Log(challenge.progressSlider.value);
             if (swatDestroyed >= challenge.threshold)
             {
                 if (challenge.isRewardClaimed)
@@ -120,7 +120,7 @@ public class ChallengeManager : MonoBehaviour
                     challenge.challenge.SetActive(false);
                 }
                 challenge.claimButton.gameObject.SetActive(true);
-                Debug.Log(challenge.challengeName + " challenge is completed");
+               // Debug.Log(challenge.challengeName + " challenge is completed");
                 challenge.claimButton.onClick.AddListener(() => ClaimButtonClicked(challenge));
             }
            
@@ -136,7 +136,7 @@ public class ChallengeManager : MonoBehaviour
         PlayerPrefs.Save();
 
         challenge.isRewardClaimed= true;
-        Debug.Log("claim" + challenge.reward);
+       // Debug.Log("claim" + challenge.reward);
 
         PlayerPrefs.SetInt(challenge.challengeName + "_isRewardClaimed", 1);
         PlayerPrefs.Save();
