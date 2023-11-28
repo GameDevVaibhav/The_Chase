@@ -30,6 +30,7 @@ public class MainMenu : MonoBehaviour
     private int selectedCarIndex = 0;
 
     public TextMeshProUGUI cash;
+    public TextMeshProUGUI bounty;
     public TextMeshProUGUI notificationText;
     public AudioSource audioSource;
 
@@ -51,6 +52,8 @@ public class MainMenu : MonoBehaviour
     {
         // Find the main camera during runtime.
         mainCamera = Camera.main;
+
+        bounty.text = PlayerPrefs.GetInt("Highscore", 0).ToString();
 
         selectedCarIndex = PlayerPrefs.GetInt("SelectedCarIndex", 0);
         carUpdate(selectedCarIndex);
@@ -243,11 +246,11 @@ public class MainMenu : MonoBehaviour
 
     private void ShowNotification(string message)
     {
-        // Display the notification text with the specified message
+       
         notificationText.text = message;
         notificationText.gameObject.SetActive(true);
 
-        // Hide the notification after a short delay (you can adjust the delay)
+       
         StartCoroutine(HideNotificationAfterDelay(2.0f));
     }
 

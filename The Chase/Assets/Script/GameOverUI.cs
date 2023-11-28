@@ -29,7 +29,7 @@ public class GameOverUI : MonoBehaviour
     {
         // Enable the Game Over panel.
         gameOverPanel.SetActive(true);
-
+        
         // Update the bounty and cash values on the Game Over panel.
         UpdateBountyText();
         UpdateCashText();
