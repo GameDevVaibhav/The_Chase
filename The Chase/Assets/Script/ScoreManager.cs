@@ -20,6 +20,8 @@ public class ScoreManager : MonoBehaviour
     private float updateInterval = 1.0f;
     private int highscore = 0;
     private bool highscoreNotificationShown = false;
+    private float startHighscore;
+
 
 
     private PlayerCarCollision playerCarCollision;
@@ -35,6 +37,7 @@ public class ScoreManager : MonoBehaviour
         cashText.text = cashCount.ToString();
 
         highscore = PlayerPrefs.GetInt("Highscore", 0);
+        startHighscore = highscore;
         Debug.Log(highscore);
 
         // Load the cash count from PlayerPrefs or default to 0.
@@ -115,13 +118,14 @@ public class ScoreManager : MonoBehaviour
 
     private void SaveHighscore()
     {
+        
         if (score > highscore)
         {
             highscore = score;
             
             PlayerPrefs.SetInt("Highscore", highscore);
             PlayerPrefs.Save();
-            if (!highscoreNotificationShown)
+            if (!highscoreNotificationShown && startHighscore!=0)
             {
                 ShowNotification("HIGH SCORE!");
                 highscoreNotificationShown = true;
