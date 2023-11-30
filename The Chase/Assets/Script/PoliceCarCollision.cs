@@ -37,7 +37,7 @@ public class PoliceCarCollision : MonoBehaviour
             Destroy(gameObject);
             carDestroyCounter.CarDestroyed();
             InstantiateImpactPrefab(collision.contacts[0].point);
-            scoreManager.IncreaseBountyOnDestroy(50);
+            scoreManager.IncreaseBountyOnDestroy(20);
             
         }
 

@@ -12,9 +12,12 @@ public class MainMenu : MonoBehaviour
     public Button colorButton;
     public Button challengeButton;
     public Button carSelectButton;
+    public Button instructionsButton;
     public GameObject colorSelectPanel;
     public GameObject challengePanel;
     public GameObject carSelectPanel;
+    public GameObject instructionsPanel;
+    public Button backButton;
     public Button button1;
     public Button button2;
     public Button button3;
@@ -39,6 +42,7 @@ public class MainMenu : MonoBehaviour
     private bool colorPanelActive = false;
     private bool challengePanelActive = false;
     private bool carSelectPanelActive = false;
+    private bool instructionsPanelActive = false;
 
     private Camera mainCamera; // Reference to the main camera.
 
@@ -64,6 +68,8 @@ public class MainMenu : MonoBehaviour
         colorButton.onClick.AddListener(ToggleColorSelectPanel);
         challengeButton.onClick.AddListener(ToggleChallengePanel);
         carSelectButton.onClick.AddListener(ToggleCarSelectPanel);
+        instructionsButton.onClick.AddListener(ToggleInstructionsPanelOn);
+        backButton.onClick.AddListener(ToggleInstructionsPanelOff);
 
         selectedColor = "#FFD966";
         
@@ -148,6 +154,16 @@ public class MainMenu : MonoBehaviour
         colorPanelActive = false;
         challengePanel.SetActive(false);
         challengePanelActive = false;
+    }
+    private void ToggleInstructionsPanelOn()
+    {
+        
+        instructionsPanel.SetActive(true);
+    }
+    private void ToggleInstructionsPanelOff()
+    {
+        Debug.Log("Back Button");
+        instructionsPanel.SetActive(false);
     }
 
     private void ChangeCameraColor(string hexColor)
