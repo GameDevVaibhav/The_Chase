@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+//Car is destroyed when 3 bikes collides with it.
 public class PoliceCarCollision : MonoBehaviour
 {
     private int collisionCount = 0;
@@ -43,9 +44,9 @@ public class PoliceCarCollision : MonoBehaviour
 
         if (bikeCollision)
         {
-            collisionCount++; // Increment the collision count when colliding with a police bike.
+            collisionCount++; 
 
-            // Check if the collision count reaches 3, and destroy the police car if it does.
+           
             if (collisionCount >= 3)
             {
                 Destroy(gameObject);
@@ -60,7 +61,7 @@ public class PoliceCarCollision : MonoBehaviour
 
                 if (scoreManager != null)
                 {
-                    scoreManager.IncreaseBountyOnDestroy(25); // Adjust the bounty amount as needed.
+                    scoreManager.IncreaseBountyOnDestroy(25); 
                 }
 
                 collisionCount = 0;

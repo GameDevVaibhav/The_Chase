@@ -23,13 +23,13 @@ public class SwatCarCollision : MonoBehaviour
             if (scoreManager != null)
             {
                 scoreManager.IncreaseBountyOnDestroy(30);
-                // Adjust the bounty amount as needed.
+                
             }
         }
     }
     private void InstantiateImpactPrefab(Vector2 position)
     {
-        // Instantiate the impact prefab at the specified position.
+        
         if (impactPrefab != null)
         {
             Instantiate(impactPrefab, position, Quaternion.identity);

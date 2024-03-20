@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PoliceSpawner : MonoBehaviour
 {
-    public GameObject policeCarPrefab; // Reference to the police car prefab.
-    public Transform playerCarTransform; // Reference to the player car's transform.
-    public Transform[] spawnPoints; // Array of spawn points for police cars.
-    public float spawnInterval = 3.0f; // Time interval between spawns.
+    public GameObject policeCarPrefab; 
+    public Transform playerCarTransform; 
+    public Transform[] spawnPoints; 
+    public float spawnInterval = 3.0f; 
 
     private float timeSinceLastSpawn = 0;
 
@@ -41,14 +41,14 @@ public class PoliceSpawner : MonoBehaviour
             return;
         }
 
-        // Select a random spawn point from the array.
+        
         int randomIndex = Random.Range(0, spawnPoints.Length);
         Transform spawnPoint = spawnPoints[randomIndex];
 
-        // Spawn the police car at the selected spawn point.
+        
         GameObject policeCar = Instantiate(policeCarPrefab, spawnPoint.position, Quaternion.identity);
 
-        // Assign the player car as the target to the police car.
+       
         PoliceCarMovement policeCarMovement = policeCar.GetComponent<PoliceCarMovement>();
         if (policeCarMovement != null)
         {

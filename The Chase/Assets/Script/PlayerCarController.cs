@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+//Player car continously moves forward and rotation is set according to the target and here target is the Arrow we created.Also speed is increase when Speedboost is used.
 public class PlayerCarController : MonoBehaviour
 {
     [SerializeField]
@@ -40,7 +41,7 @@ public class PlayerCarController : MonoBehaviour
 
         playerCarCollision = GetComponent<PlayerCarCollision>();
 
-        // Retrieve the selected car index from PlayerPrefs
+       
         int selectedCarIndex = PlayerPrefs.GetInt("SelectedCarIndex", 0);
 
         carSelect(selectedCarIndex);
@@ -54,17 +55,17 @@ public class PlayerCarController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Calculate the direction from the player to the target
+        
         Vector3 directionToTarget = target.position - transform.position;
 
-        // Calculate the angle to rotate the player to face the target
+        
         float angleToTarget = Mathf.Atan2(directionToTarget.x, directionToTarget.y) * Mathf.Rad2Deg;
 
-        // Rotate the player to face the target
+        
         Quaternion targetRotation = Quaternion.Euler(0f, 0f, -angleToTarget);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, steer * Time.fixedDeltaTime);
 
-        // Move the player perpendicular to the target
+        
         if (playerCarCollision.canMove)
         {
             myRigidBody.velocity = transform.up * moveSpeed * Time.fixedDeltaTime * 10f;
@@ -109,7 +110,7 @@ public class PlayerCarController : MonoBehaviour
 
     IEnumerator SpeedBoostEffect()
     {
-        moveSpeed += 2.0f; // Increase the speed when the pickup is collected.
+        moveSpeed += 3.0f; // Increase the speed when the pickup is collected.
 
         yield return new WaitForSeconds(speedBoostDuration);
 
@@ -136,7 +137,7 @@ public class PlayerCarController : MonoBehaviour
         else
         {
             Debug.LogWarning("Selected car index not found. Using default sprite.");
-            // Example: carSpriteRenderer.sprite = defaultSprite;
+            
         }
     }
 }

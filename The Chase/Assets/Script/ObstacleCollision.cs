@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//when obstacle collision occurs impact vfx is instantiated and obstacle is destroyed;
 public class ObstacleCollision : MonoBehaviour
 {
     public GameObject impactPrefab;
@@ -33,7 +34,7 @@ public class ObstacleCollision : MonoBehaviour
 
     private void InstantiateImpactPrefab(Vector2 position)
     {
-        // Instantiate the impact prefab at the specified position.
+        
         if (impactPrefab != null)
         {
             Instantiate(impactPrefab, position, Quaternion.identity);

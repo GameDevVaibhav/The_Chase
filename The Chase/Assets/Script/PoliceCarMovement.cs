@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Police cars moves towards the player.
 public class PoliceCarMovement : MonoBehaviour
 {
     [SerializeField]
@@ -28,12 +29,19 @@ public class PoliceCarMovement : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+   
     void FixedUpdate()
     {
+        
         myRigidBody.velocity = transform.up * moveSpeed * Time.fixedDeltaTime * 10f;
+
+       
         Vector2 direction = (target.position - transform.position).normalized+ new Vector3(offset,0f,0f);
+
+        
         float rotationSteer=Vector3.Cross(transform.up,direction).z;
+
+        
         myRigidBody.angularVelocity = rotationSteer * steer * 10f;
 
        

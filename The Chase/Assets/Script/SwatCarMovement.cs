@@ -10,7 +10,7 @@ public class SwatCarMovement : MonoBehaviour
     float steer = 10f;
     float input;
     public Transform target;
-    public Vector3 offset; // Offset for the SWAT car
+    public Vector3 offset; 
 
     Rigidbody2D myRigidBody;
 
@@ -22,19 +22,19 @@ public class SwatCarMovement : MonoBehaviour
 
     void Update()
     {
-      // input = Input.GetAxis("Horizontal");
+      
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Calculate the desired position of the SWAT car with the given offset
+        
         Vector3 desiredPosition = target.position + target.right * offset.x;
 
-        // Gradually move the SWAT car towards the desired position
+        
         transform.position = Vector3.Lerp(transform.position, desiredPosition, moveSpeed * Time.fixedDeltaTime*0.3f);
 
-        // Gradually rotate the SWAT car towards the desired rotation
+        
         transform.rotation = Quaternion.Slerp(transform.rotation, target.transform.rotation, moveSpeed * Time.fixedDeltaTime);
 
         myRigidBody.velocity = transform.up * moveSpeed * Time.fixedDeltaTime * 10f;

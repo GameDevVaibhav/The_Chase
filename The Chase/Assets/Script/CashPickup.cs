@@ -8,7 +8,7 @@ public class CashPickup : MonoBehaviour
     {
         if (other.CompareTag("PlayerCar"))
         {
-            Destroy(gameObject); // Destroy the pickup upon collection by the player car.
+            Destroy(gameObject); 
         }
     }
 }

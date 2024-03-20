@@ -1,12 +1,13 @@
 using UnityEngine;
 
+//Handle Vibrations. these are called when collisions occurs.
 public class HandleVibration : MonoBehaviour
 {
-    private bool hapticFeedbackEnabled = true; // Toggle this based on device support.
+    private bool hapticFeedbackEnabled = true; 
 
     public void TriggerShortVibration()
     {
-        if (hapticFeedbackEnabled /*&& SystemInfo.supportsVibration*/)
+        if (hapticFeedbackEnabled)
         {
             Handheld.Vibrate();
            
@@ -15,15 +16,15 @@ public class HandleVibration : MonoBehaviour
 
     public void TriggerLongVibration()
     {
-        if (hapticFeedbackEnabled /*&& SystemInfo.supportsVibration*/)
+        if (hapticFeedbackEnabled )
         {
-            // Adjust the duration as needed.
+            
             VibrateForDuration(500);
             
         }
     }
 
-    // Helper method for custom vibration duration.
+    
     private void VibrateForDuration(long milliseconds)
     {
         if (hapticFeedbackEnabled && SystemInfo.supportsVibration)

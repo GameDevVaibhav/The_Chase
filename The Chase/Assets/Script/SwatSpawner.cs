@@ -53,7 +53,7 @@ public class SwatSpawner : MonoBehaviour
     {
         spawnedCars[index] = Instantiate(swatCarPrefab, spawnPoint.position, Quaternion.identity);
 
-        // Assign the player car as the target to the SWAT car.
+        
         SwatCarMovement swatCarMovement = spawnedCars[index].GetComponent<SwatCarMovement>();
         if (swatCarMovement != null)
         {

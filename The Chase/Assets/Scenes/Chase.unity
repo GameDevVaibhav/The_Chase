@@ -1637,7 +1637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 20
   steer: 25
-  speedBoostDuration: 3
+  speedBoostDuration: 4
   target: {fileID: 1077996186}
   audioSource: {fileID: 173607063}
   audioCash: {fileID: 52663981}

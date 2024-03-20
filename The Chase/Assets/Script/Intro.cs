@@ -7,10 +7,10 @@ using UnityEngine.Video;
 public class Intro : MonoBehaviour
 {
     VideoPlayer video;
-    // Start is called before the first frame update
+    
     void Start()
     {
-        //video.Play();
+        
         StartCoroutine(Wait());
     }
 

@@ -13,10 +13,7 @@ public class ChallengePrefab : MonoBehaviour
     public int reward;
     public bool isCompleted;
 
-    // You can add any other properties or methods specific to the prefab here
+    
 
-    public void Initialize()
-    {
-        // Add initialization logic here if needed
-    }
+    
 }

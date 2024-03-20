@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Arrow guides the player car. Car rotate towards the arrow. Arrow is clamped inside a circular area.
 public class Arrow : MonoBehaviour
 {
     private Vector3 initialTouchPosition;
@@ -8,16 +9,16 @@ public class Arrow : MonoBehaviour
     [SerializeField]
     private float sensitivity = 0.01f;
     [SerializeField]
-    private float maxDistanceFromCenter = 1.0f; // Maximum distance from the parent object's center
+    private float maxDistanceFromCenter = 1.0f; 
 
-    // Reference to the parent object
+    
     public Transform parentObject;
 
     void Update()
     {
-        if (Input.touchCount > 0) // Check if there are any touches
+        if (Input.touchCount > 0) 
         {
-            Touch touch = Input.GetTouch(0); // Get the first touch
+            Touch touch = Input.GetTouch(0); 
 
             if (touch.phase == TouchPhase.Began)
             {
@@ -34,17 +35,17 @@ public class Arrow : MonoBehaviour
 
                 Vector3 newPosition = transform.position + new Vector3(touchMovement.x, touchMovement.y, 0f);
 
-                // Calculate the distance from the parent object's center
+                
                 float distanceFromCenter = Vector3.Distance(parentObject.position, newPosition);
 
-                // Ensure the object stays within the circular boundary
+               
                 if (distanceFromCenter <= maxDistanceFromCenter)
                 {
                     transform.position = newPosition;
                 }
                 else
                 {
-                    // If the object goes beyond the boundary, clamp it back
+                    
                     Vector3 directionFromCenter = (newPosition - parentObject.position).normalized;
                     transform.position = parentObject.position + directionFromCenter * maxDistanceFromCenter;
                 }

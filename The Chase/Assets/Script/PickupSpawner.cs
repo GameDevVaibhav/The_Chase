@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Random spawn points is selected and spawns the cash/speedboost. 
 public class PickupSpawner : MonoBehaviour
 {
-    public GameObject pickupPrefab; // Reference to the pickup prefab.
-    public GameObject cashPickupPrefab; // Reference to the CashPickup prefab.
-    public Transform playerCarTransform; // Reference to the player car's transform.
-    public float yOffset = 5.0f; // Vertical offset for spawning (adjust as needed).
-    public float speedSpawnInterval = 10.0f; // Time interval between spawning pickups.
-    public float cashSpawnInterval = 5.0f; // Time interval between spawning CashPickups.
-    public Transform[] speedBoostSpawnPoints; // Array of spawn points for speed boost pickups.
-    public Transform[] cashSpawnPoints; // Array of spawn points for cash pickups.
+    public GameObject pickupPrefab; 
+    public GameObject cashPickupPrefab; 
+    public Transform playerCarTransform; 
+    public float yOffset = 5.0f; 
+    public float speedSpawnInterval = 10.0f; 
+    public float cashSpawnInterval = 5.0f; 
+    public Transform[] speedBoostSpawnPoints; 
+    public Transform[] cashSpawnPoints; 
     private float timeSinceLastSpawn = 0;
     private float timeSinceLastCashSpawn = 0;
 
@@ -54,7 +55,7 @@ public class PickupSpawner : MonoBehaviour
             return;
         }
 
-        // Select a random spawn point from the array.
+       
         int randomIndex = Random.Range(0, speedBoostSpawnPoints.Length);
         Transform spawnPoint = speedBoostSpawnPoints[randomIndex];
 
@@ -62,7 +63,7 @@ public class PickupSpawner : MonoBehaviour
         float camWidth = camHeight * mainCamera.aspect;
         float randomX = Random.Range(-camWidth, camWidth);
 
-        // Use the selected spawn point to determine the position of the pickup.
+        
         Vector3 spawnPosition = spawnPoint.position + new Vector3(randomX, camHeight + yOffset, 0);
 
         Instantiate(pickupPrefab, spawnPosition, Quaternion.identity);
@@ -80,7 +81,7 @@ public class PickupSpawner : MonoBehaviour
             return;
         }
 
-        // Select a random spawn point from the array.
+        
         int randomIndex = Random.Range(0, cashSpawnPoints.Length);
         Transform spawnPoint = cashSpawnPoints[randomIndex];
 
@@ -88,7 +89,7 @@ public class PickupSpawner : MonoBehaviour
         float camWidth = camHeight * mainCamera.aspect;
         float randomX = Random.Range(-camWidth, camWidth);
 
-        // Use the selected spawn point to determine the position of the cash pickup.
+        
         Vector3 spawnPosition = spawnPoint.position + new Vector3(randomX, camHeight + yOffset, 0);
 
         Instantiate(cashPickupPrefab, spawnPosition, Quaternion.identity);

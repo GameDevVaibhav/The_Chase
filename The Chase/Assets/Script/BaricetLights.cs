@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
+//Blinking lights on barricade 
 public class BaricetLights : MonoBehaviour
 {
-    public Light2D light1; // Reference to the first light.
-    public Light2D light2; // Reference to the second light.
-    public float blinkInterval = 0.5f; // Time interval for blinking (adjust as needed).
+    public Light2D light1; 
+    public Light2D light2; 
+    public float blinkInterval = 0.5f; 
 
     private float timer;
     private bool isLight1Active = true;
@@ -35,9 +36,9 @@ public class BaricetLights : MonoBehaviour
                 light2.enabled = false;
             }
 
-            isLight1Active = !isLight1Active; // Toggle the flag.
+            isLight1Active = !isLight1Active; 
 
-            timer = blinkInterval; // Reset the timer.
+            timer = blinkInterval; 
         }
     }
 }

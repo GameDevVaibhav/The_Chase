@@ -15,16 +15,16 @@ public class SirenLights : MonoBehaviour
 
     void Start()
     {
-        // Initialize the last flicker time.
+       
         lastFlickerTime = Time.time;
     }
 
     void Update()
     {
-        // Check if it's time to flicker the lights.
+        
         if (Time.time - lastFlickerTime >= 1.0f / flickerSpeed)
         {
-            // Toggle between the two lights.
+            
             if (isLight1Active)
             {
                 light1.enabled = false;
@@ -38,7 +38,7 @@ public class SirenLights : MonoBehaviour
 
             isLight1Active = !isLight1Active;
 
-            // Update the last flicker time.
+           
             lastFlickerTime = Time.time;
         }
     }

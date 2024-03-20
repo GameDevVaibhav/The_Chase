@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Random spawn point is selected and obstacle is spawned at that position.
 public class ObstacleSpawner : MonoBehaviour
 {
-    public GameObject barrierPrefab; // Reference to the barrier prefab.
-    public Transform[] obstacleSpawnPoints; // Array of spawn points for obstacles.
-    public float spawnInterval = 4.0f; // Time interval between spawning.
-    public float yOffset = 5.0f; // Vertical offset for spawning (adjust as needed).
+    public GameObject barrierPrefab; 
+    public Transform[] obstacleSpawnPoints; 
+    public float spawnInterval = 4.0f; 
+    public float yOffset = 5.0f; 
     public bool spawnObstacle = true;
 
     private Camera mainCamera;
@@ -45,14 +46,14 @@ public class ObstacleSpawner : MonoBehaviour
             return;
         }
 
-        // Select a random spawn point from the array.
+        
         int randomIndex = Random.Range(0, obstacleSpawnPoints.Length);
         Transform spawnPoint = obstacleSpawnPoints[randomIndex];
 
         float camHeight = mainCamera.orthographicSize;
         float camWidth = camHeight * mainCamera.aspect;
 
-        // Use the selected spawn point to determine the position of the obstacle.
+        
         float randomX = Random.Range(-camWidth, camWidth);
         Vector3 spawnPosition = spawnPoint.position + new Vector3(randomX, camHeight + yOffset, 0);
 

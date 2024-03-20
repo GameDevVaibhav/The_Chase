@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//reduce player health when collision takes place. If there are swat cars in the scene reduce player health. If health<0 game over.
 public class PlayerCarCollision : MonoBehaviour
 {
     public GameOverUI gameOverUI;
     public float playerHealth = 10f;
     private float lastCollisionTime = 0f;
-    private float timeBetweenCollisions = 4f; // Set the time limit for resetting health here.
-    private float swatCarDamageInterval = 1.0f; // Time interval to reduce health if a SwatCar is in the scene.
+    private float timeBetweenCollisions = 4f; 
+    private float swatCarDamageInterval = 1.0f; 
     private float lastSwatCarDamageTime = 0f;
     private float swatCarDamage;
     public HandleVibration handleVibration;
@@ -18,25 +19,25 @@ public class PlayerCarCollision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (canMove) // Only process collisions if the car can move.
+        if (canMove) 
         {
             if (collision.gameObject.CompareTag("PoliceCar"))
             {
-                playerHealth -= 4f; // Reduce health by 5 when a car collides.
+                playerHealth -= 4f; 
                 handleVibration.TriggerShortVibration();
             }
             else if (collision.gameObject.CompareTag("PoliceBike"))
             {
-                playerHealth -= 3f; // Reduce health by 3 when a bike collides.
+                playerHealth -= 3f; 
                 handleVibration.TriggerShortVibration();
             }
             else if (collision.gameObject.CompareTag("Baricet"))
             {
-                playerHealth -= 5f; // Reduce health by 7 when a barrier collides.
+                playerHealth -= 5f; 
                 handleVibration.TriggerShortVibration();
             }
 
-            lastCollisionTime = Time.time; // Update the last collision time.
+            lastCollisionTime = Time.time; 
         }
 
     }
@@ -49,11 +50,11 @@ public class PlayerCarCollision : MonoBehaviour
         }
         else if (Time.time - lastCollisionTime >= timeBetweenCollisions)
         {
-            // If no collision within the specified time, reset player health.
+            
             playerHealth = 10;
         }
 
-        // Check for game over or other conditions based on player health.
+        
         if (playerHealth <= 0)
         {
             HandleVibration handleVibration = GetComponent<HandleVibration>();
@@ -91,8 +92,8 @@ public class PlayerCarCollision : MonoBehaviour
     {
         if (Time.time - lastSwatCarDamageTime >= swatCarDamageInterval)
         {
-            playerHealth -= swatCarDamage; // Reduce health by 0.5 every second when a SwatCar is in the scene.
-            lastSwatCarDamageTime = Time.time; // Update the last time health was reduced.
+            playerHealth -= swatCarDamage; 
+            lastSwatCarDamageTime = Time.time; 
             
 
           

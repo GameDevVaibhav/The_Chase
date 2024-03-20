@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Follows the player car
 public class FollowCamera : MonoBehaviour
 {
     private Vector3 offset=new Vector3(0f,0f,-10f);

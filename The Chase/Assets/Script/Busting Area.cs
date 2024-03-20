@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//If police car enters the busting area and stays more then 4sec , player is busted and game is over.
 public class BustingArea : MonoBehaviour
 {
     public GameOverUI gameOverUI;
@@ -9,26 +10,26 @@ public class BustingArea : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private int policeCarCount = 0;
     public float activeTimer = 0f;
-    //private bool gameIsOver = false;
+    
     private PlayerCarCollision playerCarCollision;
 
     private void Start()
     {
         playerCarCollision = FindObjectOfType<PlayerCarCollision>();
-        // Get the SpriteRenderer component attached to the GameObject.
+        
         spriteRenderer = GetComponent < SpriteRenderer>();
-        // Initially, the sprite should be invisible (disabled).
+       
         spriteRenderer.enabled = false;
     }
 
     private void Update()
     {
-        // Check if the sprite renderer is active.
+        
         if (spriteRenderer.enabled)
         {
             activeTimer += Time.deltaTime;
 
-            // If the timer exceeds 5 seconds and the game is not over, trigger game over.
+            
             if (activeTimer >= 4f && !playerCarCollision.isGameOver)
             {
                 Debug.Log("Busted");
@@ -40,7 +41,7 @@ public class BustingArea : MonoBehaviour
         }
         else
         {
-            // Reset the timer when the sprite renderer is not active.
+            
             activeTimer = 0f;
         }
     }
@@ -51,12 +52,12 @@ public class BustingArea : MonoBehaviour
         {
             
             policeCarCount++;
-            // Enable the sprite when at least one police car enters.
+           
             if (policeCarCount > 0)
             {
                 spriteRenderer.enabled = true;
-                // You can also change the sprite's color to red if desired.
-                // spriteRenderer.color = Color.red;
+                
+                
             }
         }
     }
@@ -67,7 +68,7 @@ public class BustingArea : MonoBehaviour
         {
             
             policeCarCount--;
-            // Disable the sprite when there are no police cars in the area.
+            
             if (policeCarCount == 0)
             {
                 spriteRenderer.enabled = false;

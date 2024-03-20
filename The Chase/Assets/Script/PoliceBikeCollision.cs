@@ -24,7 +24,7 @@ public class PoliceBikeCollision : MonoBehaviour
             if (handleVibration != null)
             {
                 handleVibration.TriggerShortVibration();
-                //Debug.Log("Bike Bike");
+                
             }
             
             Destroy(gameObject);
@@ -33,7 +33,7 @@ public class PoliceBikeCollision : MonoBehaviour
 
             if (scoreManager != null)
             {
-                scoreManager.IncreaseBountyOnDestroy(10); // Adjust the bounty amount as needed.
+                scoreManager.IncreaseBountyOnDestroy(10);
             }
         }
         if (carCollision || swatCollision || baricetCollision||playerCollision)
@@ -52,7 +52,7 @@ public class PoliceBikeCollision : MonoBehaviour
 
     private void InstantiateImpactPrefab(Vector2 position)
     {
-        // Instantiate the impact prefab at the specified position.
+        
         if (impactPrefab != null)
         {
             Instantiate(impactPrefab, position, Quaternion.identity);

@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+//this gets the car/bikes destroyed and add it to challenges and if it reach the threshold set then challenge is completed and claim button is set active 
+// and it also check if the player has claimed the reward. if claimed the challenge is removed from the list.
 public class ChallengeManager : MonoBehaviour
 {
     [System.Serializable]
@@ -38,13 +40,13 @@ public class ChallengeManager : MonoBehaviour
         carDestroyed = PlayerPrefs.GetInt("CarDestroyedCount", 0);
         swatDestroyed = PlayerPrefs.GetInt("SwatDestroyedCount", 0);
 
-        // Call the BikeChallenge method to check the bike challenges
+        
         
 
         foreach (var challenge in bikeChallenges)
         {
             challenge.isRewardClaimed = PlayerPrefs.GetInt(challenge.challengeName + "_isRewardClaimed", 0) == 1;
-           // Debug.Log("bikeC is claimed  " + challenge.isRewardClaimed);
+          
         }
         foreach (var challenge in carChallenges)
         {
@@ -64,7 +66,7 @@ public class ChallengeManager : MonoBehaviour
     {
         foreach (var challenge in challenges)
         {
-            //Debug.Log(challenge.challengeName + ":" + bikeDestroyed);
+            
             float value;
             value = (float)bikeDestroyed / (float)challenge.threshold;
             challenge.progressSlider.value = value;
@@ -76,7 +78,7 @@ public class ChallengeManager : MonoBehaviour
                     
                 }
                 challenge.claimButton.gameObject.SetActive(true);
-               // Debug.Log(challenge.challengeName + " challenge is completed");
+               
                 challenge.claimButton.onClick.AddListener(() => ClaimButtonClicked(challenge));
             }
             
@@ -86,7 +88,7 @@ public class ChallengeManager : MonoBehaviour
     {
         foreach (var challenge in challenges)
         {
-           // Debug.Log(challenge.challengeName + ":" + carDestroyed);
+           
             float value;
             value = (float)carDestroyed / (float)challenge.threshold;
             challenge.progressSlider.value = value;
@@ -97,7 +99,7 @@ public class ChallengeManager : MonoBehaviour
                     challenge.challenge.SetActive(false);
                 }
                 challenge.claimButton.gameObject.SetActive(true);
-                //Debug.Log(challenge.challengeName + " challenge is completed");
+               
                 challenge.claimButton.onClick.AddListener(() => ClaimButtonClicked(challenge));
             }
             
@@ -111,8 +113,7 @@ public class ChallengeManager : MonoBehaviour
             float value;
             value = (float)swatDestroyed / (float)challenge.threshold;
             challenge.progressSlider.value = value;
-           // Debug.Log(challenge.threshold);
-           // Debug.Log(challenge.progressSlider.value);
+           
             if (swatDestroyed >= challenge.threshold)
             {
                 if (challenge.isRewardClaimed)
@@ -120,7 +121,7 @@ public class ChallengeManager : MonoBehaviour
                     challenge.challenge.SetActive(false);
                 }
                 challenge.claimButton.gameObject.SetActive(true);
-               // Debug.Log(challenge.challengeName + " challenge is completed");
+               
                 challenge.claimButton.onClick.AddListener(() => ClaimButtonClicked(challenge));
             }
            
@@ -136,12 +137,12 @@ public class ChallengeManager : MonoBehaviour
         PlayerPrefs.Save();
 
         challenge.isRewardClaimed= true;
-       // Debug.Log("claim" + challenge.reward);
+       
 
         PlayerPrefs.SetInt(challenge.challengeName + "_isRewardClaimed", 1);
         PlayerPrefs.Save();
 
-        // Destroy the challenge object
+        
         challenge.challenge.SetActive(false);
     }
 }  
